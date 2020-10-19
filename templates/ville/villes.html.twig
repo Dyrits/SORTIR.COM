@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Villes{% endblock %}
+
+{% block main %}
+    <h1>Gérer les villes</h1>
+    {# @todo: Add the filter form. #}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Ville</th>
+            <th scope="col">Code Postal</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ville in villes %}
+        <tr>
+            <td>{{ ville.nom }}</td>
+            <td>{{ ville.codePostal }}</td>
+            {# @todo: Add the links. #}
+            <td>Modifier - Supprimer</td>
+        </tr>
+        {% endfor %}
+        <form action="{{ path("villes_persist") }}" method="POST">
+            <tr>
+                <td><input name="nom" type="text" placeholder="Nouvelle ville~" required></td>
+                <td><input name="codePostal" type="text" placeholder="Code Postal~" required></td>
+                <td><input type="submit" value="Ajouter"></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+{% endblock %}
