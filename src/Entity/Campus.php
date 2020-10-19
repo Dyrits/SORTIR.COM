@@ -59,23 +59,23 @@ class Campus
         return $this->sorties;
     }
 
-    public function addSorty(Sortie $sorty): self
+    public function addSortie(Sortie $sortie): self
     {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties[] = $sorty;
-            $sorty->setSiteOrganisateur($this);
+        if (!$this->sorties->contains($sortie)) {
+            $this->sorties[] = $sortie;
+            $sortie->setSiteOrganisateur($this);
         }
 
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): self
+    public function removeSortie(Sortie $sortie): self
     {
-        if ($this->sorties->contains($sorty)) {
-            $this->sorties->removeElement($sorty);
+        if ($this->sorties->contains($sortie)) {
+            $this->sorties->removeElement($sortie);
             // set the owning side to null (unless already changed)
-            if ($sorty->getSiteOrganisateur() === $this) {
-                $sorty->setSiteOrganisateur(null);
+            if ($sortie->getSiteOrganisateur() === $this) {
+                $sortie->setSiteOrganisateur(null);
             }
         }
 

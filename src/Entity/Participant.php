@@ -240,23 +240,23 @@ class Participant implements UserInterface
         return $this->sortiesOrganisees;
     }
 
-    public function addSortiesOrganisee(Sortie $sortiesOrganisee): self
+    public function addSortieOrganisee(Sortie $sortieOrganisee): self
     {
-        if (!$this->sortiesOrganisees->contains($sortiesOrganisee)) {
-            $this->sortiesOrganisees[] = $sortiesOrganisee;
-            $sortiesOrganisee->setOrganisateur($this);
+        if (!$this->sortiesOrganisees->contains($sortieOrganisee)) {
+            $this->sortiesOrganisees[] = $sortieOrganisee;
+            $sortieOrganisee->setOrganisateur($this);
         }
 
         return $this;
     }
 
-    public function removeSortiesOrganisee(Sortie $sortiesOrganisee): self
+    public function removeSortieOrganisee(Sortie $sortieOrganisee): self
     {
-        if ($this->sortiesOrganisees->contains($sortiesOrganisee)) {
-            $this->sortiesOrganisees->removeElement($sortiesOrganisee);
+        if ($this->sortiesOrganisees->contains($sortieOrganisee)) {
+            $this->sortiesOrganisees->removeElement($sortieOrganisee);
             // set the owning side to null (unless already changed)
-            if ($sortiesOrganisee->getOrganisateur() === $this) {
-                $sortiesOrganisee->setOrganisateur(null);
+            if ($sortieOrganisee->getOrganisateur() === $this) {
+                $sortieOrganisee->setOrganisateur(null);
             }
         }
 
@@ -271,21 +271,21 @@ class Participant implements UserInterface
         return $this->sorties;
     }
 
-    public function addSorty(Sortie $sorty): self
+    public function addSortie(Sortie $sortie): self
     {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties[] = $sorty;
-            $sorty->addParticipant($this);
+        if (!$this->sorties->contains($sortie)) {
+            $this->sorties[] = $sortie;
+            $sortie->addParticipant($this);
         }
 
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): self
+    public function removeSortie(Sortie $sortie): self
     {
-        if ($this->sorties->contains($sorty)) {
-            $this->sorties->removeElement($sorty);
-            $sorty->removeParticipant($this);
+        if ($this->sorties->contains($sortie)) {
+            $this->sorties->removeElement($sortie);
+            $sortie->removeParticipant($this);
         }
 
         return $this;
