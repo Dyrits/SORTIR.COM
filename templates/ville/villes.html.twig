@@ -1,34 +1,77 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent() }} | Villes{% endblock %}
+{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset("css/villes.css") }}">{% endblock %}
 
 {% block main %}
     <h1>Gérer les villes</h1>
+    <h2>Filtrer les villes</h2>
+    <form action="">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Le nom contient:</span>
+            </div>
+            <input type="text" class="form-control">
+            <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+        </div>
+    </form>
     {# @todo: Add the filter form. #}
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Ville</th>
-            <th scope="col">Code Postal</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for ville in villes %}
-        <tr>
-            <td>{{ ville.nom }}</td>
-            <td>{{ ville.codePostal }}</td>
-            {# @todo: Add the links. #}
-            <td>Modifier - Supprimer</td>
-        </tr>
-        {% endfor %}
-        <form action="{{ path("villes_persist") }}" method="POST">
-            <tr>
-                <td><input name="nom" type="text" placeholder="Nouvelle ville~" required></td>
-                <td><input name="codePostal" type="text" placeholder="Code Postal~" required></td>
-                <td><input type="submit" value="Ajouter"></td>
-            </tr>
+    <div id="table" class="vh-100">
+        <section class="row d-none d-lg-flex">
+                <h4 class="col-6">Ville</h4>
+                <h4 class="col-2">Code Postal</h4>
+                <h4 class="col-3">Actions</h4>
+        </section>
+        <section id="villes" class="h-50">
+            {% for ville in villes %}
+                <article class="row">
+                    <div class="col-lg-6 col-12 input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-city"></i>
+                            </span>
+                        </div>
+                        <input disabled type="text" class="form-control bg-light" value="{{ ville.nom }}">
+                    </div>
+                    <div class="col-lg-2 col-6 input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-mail-bulk"></i>
+                            </span>
+                        </div>
+                        <input disabled type="text" class="form-control bg-light" value="{{ ville.codePostal }}">
+                    </div>
+                    <div class="col-lg-3 col-6 input-group mb-3 row">
+                        <input type="submit" value="Modifier" class="btn btn-info col-5">
+                        <input type="submit" value="Supprimer" class="btn btn-danger col-6 offset-1">
+                    </div>
+                </article>
+                <hr class="d-block d-lg-none">
+            {% endfor %}
+        </section>
+        <form action="{{ path("villes_persist") }}" method="POST" class="row my-3">
+            <div class="col-lg-6 col-12 input-group mb-3">
+                <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-city"></i>
+                            </span>
+                </div>
+                <input name="nom" type="text" class="form-control">
+            </div>
+            <div class="col-lg-2 col-6 input-group mb-3">
+                <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-mail-bulk"></i>
+                            </span>
+                </div>
+                <input name="codePostal" type="text" class="form-control">
+            </div>
+            <div class="col-lg-3 col-6 input-group mb-3 row">
+                <input type="submit" value="Ajouter" class="btn btn-primary col-5">
+            </div>
         </form>
-        </tbody>
-    </table>
+    </div>
+
 {% endblock %}
