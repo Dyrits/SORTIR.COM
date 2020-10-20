@@ -3,10 +3,10 @@
 const VilleArticle = ({ville, removeVille, persistVille} ) => {
     const [initialText, secondaryText] = ville.submitText;
     const addition = !removeVille;
+    const id = ville.id;
 
     const [disabled, setDisabled] = React.useState(!addition);
     const [submitText, setSubmitText] = React.useState(initialText);
-    const [id, setId] = React.useState(ville.id);
     const [nom, setNom] = React.useState(ville.nom);
     const [codePostal, setCodePostal] = React.useState(ville.codePostal);
 
@@ -21,7 +21,7 @@ const VilleArticle = ({ville, removeVille, persistVille} ) => {
     const handleChange = (setValue, value) => { setValue(value); }
 
     return (
-        <article className="row">
+        <article className="row mb-2">
             <InputGroup
                 disabled={disabled}
                 value={nom}
