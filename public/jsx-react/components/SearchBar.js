@@ -2,7 +2,7 @@
 
 const SearchBar = ({onChange}) => {
     return (
-        <div className="input-group mb-3">
+        <div className="input-group mb-3 col-11">
             <div className="input-group-prepend">
                 <span className="input-group-text">Le nom contient:</span>
             </div>

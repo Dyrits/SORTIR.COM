@@ -24,7 +24,7 @@ const VilleList = ({villes}) => {
 
     return (
         <div>
-            <section>
+            <section className="row">
                 <SearchBar onChange={getVilles} />
             </section>
             <section className="vh-100">
