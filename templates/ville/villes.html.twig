@@ -5,19 +5,7 @@
 {% block main %}
     <h1>Gérer les villes</h1>
     <h2>Filtrer les villes</h2>
-    <form action="">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Le nom contient:</span>
-            </div>
-            <input type="text" class="form-control">
-            <div class="input-group-append">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-            </div>
-        </div>
-    </form>
-    {# @todo: Add the filter form. #}
-    <div id="table" class="vh-100">
+    <div id="list"></div>
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -26,6 +14,7 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="{{ asset("javascript/Ajax.js") }}"></script>
+    <script type="text/babel" src="{{ asset("jsx-react/components/SearchBar.js") }}"></script>
     <script type="text/babel" src="{{ asset("jsx-react/components/InputGroup.js") }}"></script>
     <script type="text/babel" src="{{ asset("jsx-react/components/SubmitInput.js") }}"></script>
     <script type="text/babel" src="{{ asset("jsx-react/ville/VilleArticle.js") }}"></script>
