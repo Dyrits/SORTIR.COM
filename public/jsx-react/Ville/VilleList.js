@@ -10,18 +10,11 @@ const VilleList = ({villes}) => {
         }
     }
 
-    const persistVille = (addition, id, nom, codePostal) => {
+    const persistVille = (id, nom, codePostal) => {
         Ajax.persist("/admin/villes/api", {id, nom, codePostal}).then(() => {
-            Ajax.get("/admin/villes/api").then(villes => {
-                setList(villes);
-            })
-
+            Ajax.get("/admin/villes/api").then(villes => { setList(villes); })
         });
     };
-
-    React.useEffect = () => {
-        console.log("Update");
-    }
 
     return (
         <div>
@@ -33,11 +26,11 @@ const VilleList = ({villes}) => {
             <section id="villes">
                 {list.map(ville => {
                     ville["submitText"]= ["Modifier", "Valider"];
-                    return <Ville key={ville.id} ville={ville} removeVille={removeVille} persistVille={persistVille}/>
+                    return <VilleArticle key={ville.id} ville={ville} removeVille={removeVille} persistVille={persistVille}/>;
                 })}
             </section>
             <section className="mt-2">
-                <Ville
+                <VilleArticle
                     ville={{
                         id: null,
                         nom: String(),

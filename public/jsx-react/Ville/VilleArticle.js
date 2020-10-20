@@ -1,8 +1,8 @@
 "use strict";
 
-const Ville = ( {ville, removeVille, persistVille} ) => {
+const VilleArticle = ({ville, removeVille, persistVille} ) => {
     const [initialText, secondaryText] = ville.submitText;
-    const addition = ville.submitText.length === 1;
+    const addition = !removeVille;
 
     const [disabled, setDisabled] = React.useState(!addition);
     const [submitText, setSubmitText] = React.useState(initialText);
@@ -11,7 +11,7 @@ const Ville = ( {ville, removeVille, persistVille} ) => {
     const [codePostal, setCodePostal] = React.useState(ville.codePostal);
 
     const handleClick = () => {
-        if (!disabled) { persistVille(addition, id, nom, codePostal); }
+        if (!disabled) { persistVille(id, nom, codePostal); }
         if (!addition) {
             setDisabled(prevDisabled => { setDisabled(!prevDisabled) });
             setSubmitText(prevSubmitText => { setSubmitText(prevSubmitText === initialText ? secondaryText : initialText)});
@@ -51,7 +51,6 @@ const Ville = ( {ville, removeVille, persistVille} ) => {
                     classes="btn btn-danger col-6 offset-1"
                 />}
             </div>
-            <hr className="d-block d-lg-none"/>
         </article>
     );
 };
