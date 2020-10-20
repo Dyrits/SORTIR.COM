@@ -25,6 +25,7 @@ class VilleRepository extends ServiceEntityRepository
             ->andWhere("v.nom LIKE :nom")
             ->setParameter("nom", "%".$nom."%")
             ->orderBy("v.codePostal", "ASC")
+            ->orderBy("v.nom", "ASC")
             ->getQuery()
             ->getArrayResult();
     }

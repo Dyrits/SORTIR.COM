@@ -25,35 +25,45 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/villes", name="villes_list", methods={"GET"})
+     * @Route("/villes", name="villes_display")
+     * @param Request $request
+     * @return Response
+     */
+    public function display(Request $request) {
+        return $this->render("ville/villes.html.twig");
+    }
+
+    /**
+     * @Route("/villes/api", name="villes_list", methods={"GET"})
      * @param Request $request
      * @return Response
      */
     public function list(Request $request) {
         $nom = $request->get("nom");
         $villes = $this->repository->findByNomLike($nom);
-        return $this->render("ville/villes.html.twig", ["villes" => $villes]);
+        return $this->json($villes);
     }
 
     /**
-     * @Route("/villes", name="villes_persist", methods={"POST"})
+     * @Route("/villes/api", name="villes_persist", methods={"POST"})
      * @param Request $request
      * @return Response
      */
     public function persist(Request $request) {
-        $id = $request->get("id");
-        $nom = $request->get("nom");
-        $codePostal = $request->get("codePostal");
-        $ville = $id ? $this->repository->find($id) : new Ville();
+        $json = json_decode($request->getContent());
+        $id = array_key_exists("id", $json) ? $id = $json->id : null;
+        $nom = $json->nom;
+        $codePostal = $json->codePostal;
+        $ville = $id ? $this->repository->find($json->id) : new Ville();
         $ville->setNom($nom);
         $ville->setCodePostal($codePostal);
         $this->manager->persist($ville);
         $this->manager->flush();
-        return $this->redirectToRoute("villes_list");
+        return $this->json($ville);
     }
 
     /**
-     * @Route("/villes/{id}", name="villes_remove", requirements={"id": "\d+"}, methods={"DELETE"})
+     * @Route("/villes/api/{id}", name="villes_remove", requirements={"id": "\d+"}, methods={"DELETE"})
      * @param $id
      * @param Request $request
      * @return Response
@@ -62,6 +72,6 @@ class VilleController extends AbstractController
         $ville = $this->repository->find($id);
         $this->manager->remove($ville);
         $this->manager->flush();
-        return $this->redirectToRoute("villes_list");
+        return $this->json($ville);
     }
 }
