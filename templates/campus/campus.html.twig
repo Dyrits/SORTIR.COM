@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} | Campus{% endblock %}
+{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset("css/villes.css") }}">{% endblock %}
+
+{% block main %}
+<h1>Gérer les campus</h1>
+<h2>Filtrer les sites</h2>
+<div id="table"></div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="{{ asset("javascript/Ajax.js") }}"></script>
+<script type="text/babel" src="{{ asset("jsx-react/components/SearchBar.js") }}"></script>
+<script type="text/babel" src="{{ asset("jsx-react/components/InputGroup.js") }}"></script>
+<script type="text/babel" src="{{ asset("jsx-react/components/SubmitInput.js") }}"></script>
+<script type="text/babel" src="{{ asset("jsx-react/components/Line.js") }}"></script>
+<script type="text/babel" src="{{ asset("jsx-react/components/Table.js") }}"></script>
+<script type="text/babel" src="{{ asset("jsx-react/Campus.js") }}"></script>
+{%  endblock %}

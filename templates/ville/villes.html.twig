@@ -5,7 +5,7 @@
 {% block main %}
     <h1>Gérer les villes</h1>
     <h2>Filtrer les villes</h2>
-    <div id="list"></div>
+    <div id="table"></div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
@@ -16,6 +16,7 @@
     <script type="text/babel" src="{{ asset("jsx-react/components/SearchBar.js") }}"></script>
     <script type="text/babel" src="{{ asset("jsx-react/components/InputGroup.js") }}"></script>
     <script type="text/babel" src="{{ asset("jsx-react/components/SubmitInput.js") }}"></script>
-    <script type="text/babel" src="{{ asset("jsx-react/ville/VilleArticle.js") }}"></script>
-    <script type="text/babel" src="{{ asset("jsx-react/ville/VilleList.js") }}"></script>
+    <script type="text/babel" src="{{ asset("jsx-react/components/Line.js") }}"></script>
+    <script type="text/babel" src="{{ asset("jsx-react/components/Table.js") }}"></script>
+    <script type="text/babel" src="{{ asset("jsx-react/Ville.js") }}"></script>
 {%  endblock %}
