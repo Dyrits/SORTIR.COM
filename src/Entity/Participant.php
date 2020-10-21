@@ -76,6 +76,12 @@ class Participant implements UserInterface
      */
     private $sorties;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
     public function __construct()
     {
         $this->sortiesOrganisees = new ArrayCollection();
@@ -287,6 +293,18 @@ class Participant implements UserInterface
             $this->sorties->removeElement($sortie);
             $sortie->removeParticipant($this);
         }
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }
