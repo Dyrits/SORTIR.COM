@@ -23,7 +23,7 @@ const Ville = ({data}) => {
         });
     };
 
-    const getVilles = (nom = "") => {
+    const get = (nom = "") => {
         Ajax.get(`/admin/villes/api?nom=${nom}`).then(villes => {
             setVilles(villes);
         });
@@ -78,7 +78,7 @@ const Ville = ({data}) => {
 
     return (
         <div>
-            <SearchBar onChange={getVilles} />
+            <SearchBar onChange={get} />
             <Table data={villes} headers={headers} hydrate={hydrate} />
         </div>
     );
