@@ -53,6 +53,7 @@ const Ville = ({data}) => {
         if (insert) {
             ville.buttons = [
                 {
+                    persist: true,
                     value: {"true": "Ajouter", "false": "Ajouter"},
                     classes: {"true": "btn btn-success col-5", "false": "btn btn-success col-5"},
                 }
@@ -60,12 +61,13 @@ const Ville = ({data}) => {
         } else {
             ville.buttons = [
                 {
+                    persist: true,
                     value: {"true": "Modifier", "false": "Valider"},
                     classes: {"true": "btn btn-info col-5", "false": "btn btn-warning col-5"}
                 },
                 {
-                    value: {"true": "Supprimer", "false": "Supprimer"},
                     remove: true,
+                    value: {"true": "Supprimer", "false": "Supprimer"},
                     classes: {"true": "btn btn-danger col-5 offset-1", "false": "btn btn-danger col-5 offset-1"}
                 }
             ]

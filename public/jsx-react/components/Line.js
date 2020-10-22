@@ -7,9 +7,8 @@ const Line = ({line}) => {
 
     line.inputs.forEach(input => { [input.value, input.setValue] = React.useState(input.value); })
 
-    const handleClick = (input) => {
-        if (input.remove) { line.remove(line); }
-        else if (!line.disabled) {
+    const update = () => {
+        if (!line.disabled) {
             const values = [];
             if (!line.inputs.every(input => {
                 values.push(input.value)
@@ -18,20 +17,14 @@ const Line = ({line}) => {
             line.persist(id, ...values)
         }
         !line.insert && setDisabled(previous => !previous);
-
     }
 
-    const handleKeyPress = (key) => {
-        if (key === "Enter" && !line.disabled) {
-            const values = [];
-            if (!line.inputs.every(input => {
-                values.push(input.value)
-                return input.value;
-            })) { return alert("Veuillez remplir les différents champs et ne pas laisser de valeur vide."); }
-            line.persist(id, ...values);
-            !line.insert && setDisabled(previous => !previous);
-        }
+    const handleClick = (input) => {
+        if (input.remove) { line.remove(line); }
+        if (input.persist) { update(); }
     }
+
+    const handleKeyPress = (key) => { (key === "Enter") && update(); }
 
     const handleChange = (setValue, value) => { setValue(value); }
 
