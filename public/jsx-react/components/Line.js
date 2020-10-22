@@ -11,7 +11,10 @@ const Line = ({line}) => {
         if (input.remove) { line.remove(line); }
         else if (!line.disabled) {
             const values = [];
-            line.inputs.forEach(input => { values.push(input.value) })
+            line.inputs.forEach(input => {
+                if (!input.value) { return; }
+                values.push(input.value)
+            });
             line.persist(id, ...values)
         }
         !line.insert && setDisabled(previous => !previous);
@@ -20,8 +23,11 @@ const Line = ({line}) => {
     const handleKeyPress = (key) => {
         if (key === "Enter" && !line.disabled) {
             const values = [];
-            line.inputs.forEach(input => { values.push(input.value) })
-            line.persist(id, ...values)
+            line.inputs.forEach(input => {
+                if (!input.value) { return; }
+                values.push(input.value)
+            });
+            line.persist(id, ...values);
             !line.insert && setDisabled(previous => !previous);
         }
 
@@ -35,7 +41,7 @@ const Line = ({line}) => {
                 return (
                     <InputGroup
                         key={index}
-                        disabled={line.disabled}
+                        disabled={  disabled}
                         value={input.value}
                         setValue={input.setValue}
                         placeholder={input.placeholder && input.placeholder}
