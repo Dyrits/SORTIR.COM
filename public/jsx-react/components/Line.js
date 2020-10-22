@@ -11,22 +11,23 @@ const Line = ({line}) => {
         if (input.remove) { line.remove(line); }
         else if (!line.disabled) {
             const values = [];
-            line.inputs.forEach(input => {
-                if (!input.value) { return; }
+            if (!line.inputs.every(input => {
                 values.push(input.value)
-            });
+                return input.value;
+            })) { return; }
             line.persist(id, ...values)
         }
         !line.insert && setDisabled(previous => !previous);
+
     }
 
     const handleKeyPress = (key) => {
         if (key === "Enter" && !line.disabled) {
             const values = [];
-            line.inputs.forEach(input => {
-                if (!input.value) { return; }
+            if (!line.inputs.every(input => {
                 values.push(input.value)
-            });
+                return input.value;
+            })) { return; }
             line.persist(id, ...values);
             !line.insert && setDisabled(previous => !previous);
         }
