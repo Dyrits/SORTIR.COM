@@ -47,7 +47,8 @@ const Sortie = ({data}) => {
             sortie.participation,
             sortie.etat,
             sortie.isInscrit,
-            sortie.organisateur
+            sortie.organisateur,
+            sortie.lieu
         ]
         sortie.actions = { classes: "d-none d-lg-flex col-lg-2 input-group mb-3 row" };
         sortie.buttons = [{
