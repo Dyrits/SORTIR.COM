@@ -33,7 +33,9 @@ const Ville = ({data}) => {
         ville = ville ? ville : {};
         ville.id = ville ? ville.id : null;
         ville.insert = insert;
-        ville.columns = [
+        ville.persist = persist;
+        ville.remove = remove;
+        ville.inputs = [
             {
                 value: ville.nom || String(),
                 placeholder: insert ? "Ville~" : String(),
@@ -51,25 +53,20 @@ const Ville = ({data}) => {
         if (insert) {
             ville.buttons = [
                 {
-                    primary: "Ajouter",
-                    function: persist,
-                    primaryClasses: "btn btn-success col-5",
+                    value: {"true": "Ajouter", "false": "Ajouter"},
+                    classes: {"true": "btn btn-success col-5", "false": "btn btn-success col-5"},
                 }
             ]
         } else {
             ville.buttons = [
                 {
-                    primary: "Modifier",
-                    secondary: "Valider",
-                    function: persist,
-                    primaryClasses: "btn btn-info col-5",
-                    secondaryClasses: "btn btn-warning col-5"
+                    value: {"true": "Modifier", "false": "Valider"},
+                    classes: {"true": "btn btn-info col-5", "false": "btn btn-warning col-5"}
                 },
                 {
-                    primary: "Supprimer",
-                    function: remove,
+                    value: {"true": "Supprimer", "false": "Supprimer"},
                     remove: true,
-                    primaryClasses: "btn btn-danger col-5 offset-1",
+                    classes: {"true": "btn btn-danger col-5 offset-1", "false": "btn btn-danger col-5 offset-1"}
                 }
             ]
         }

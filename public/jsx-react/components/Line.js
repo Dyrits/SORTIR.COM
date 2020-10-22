@@ -3,25 +3,27 @@
 const Line = ({line}) => {
     const id = line.id;
 
-    [line.disabled, line.setDisabled] = React.useState(!line.insert);
+    const [disabled, setDisabled] = React.useState(!line.insert);
 
-    line.columns.forEach(column => { [column.value, column.setValue] = React.useState(column.value); })
+    line.inputs.forEach(input => { [input.value, input.setValue] = React.useState(input.value); })
 
-    line.buttons.forEach(button => {
-        [button.value, button.setValue] = React.useState(button.primary);
-        [button.classes, button.setClasses] = React.useState(button.primaryClasses);
-    })
-
-    const handleClick = (button, line) => {
-        if (button.remove) { button.function(line); }
+    const handleClick = (input) => {
+        if (input.remove) { line.remove(line); }
         else if (!line.disabled) {
             const values = [];
-            line.columns.forEach(column => { values.push(column.value) })
-            button.function(id, ...values)
+            line.inputs.forEach(input => { values.push(input.value) })
+            line.persist(id, ...values)
         }
-        !line.insert && line.setDisabled(previous => !previous);
-        button.secondary && button.setValue(line.disabled ? button.secondary : button.primary);
-        button.secondaryClasses && button.setClasses(line.disabled ? button.secondaryClasses : button.primaryClasses);
+        !line.insert && setDisabled(previous => !previous);
+    }
+
+    const handleKeyPress = (key) => {
+        if (key === "Enter" && !line.disabled) {
+            const values = [];
+            line.inputs.forEach(input => { values.push(input.value) })
+            line.persist(id, ...values)
+            !line.insert && setDisabled(previous => !previous);
+        }
 
     }
 
@@ -29,31 +31,30 @@ const Line = ({line}) => {
 
     return (
         <article className="row mb-2">
-            {line.columns.map((column, index) => {
+            {line.inputs.map((input, index) => {
                 return (
                     <InputGroup
                         key={index}
                         disabled={line.disabled}
-                        value={column.value}
-                        setValue={column.setValue}
-                        placeholder={column.placeholder && column.placeholder}
+                        value={input.value}
+                        setValue={input.setValue}
+                        placeholder={input.placeholder && input.placeholder}
                         handleChange={handleChange}
-                        classes={column.classes}
-                        icon={column.icon}
+                        handleKeyPress={({key}) => handleKeyPress(key)}
+                        classes={input.classes}
+                        icon={input.icon}
                     />
                 );
             })}
             <div className={line.actions.classes}>
-                {line.buttons.map((button, index) => {
-                    return (
-                        <SubmitInput
-                            key={index}
-                            value={button.value}
-                            onClick={() => handleClick(button, line)}
-                            classes={button.classes}
-                        />
-                    );
-                })}
+                {line.buttons.map((button, index) =>
+                    <input
+                        key={index}
+                        type="submit"
+                        value={button.value[line.etat || disabled]}
+                        onClick={() => handleClick(button)}
+                        className={button.classes[line.etat || disabled]} />
+                )}
             </div>
         </article>
     );

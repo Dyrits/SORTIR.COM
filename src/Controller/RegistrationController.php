@@ -43,16 +43,14 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             // @todo: Change the redirection:
-            return $this->redirectToRoute("villes_display");
+            if ($this->getUser()) { return $this->redirectToRoute('app_register'); }
 
-            /*
            return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
-            */
         }
 
         return $this->render('registration/register.html.twig', [

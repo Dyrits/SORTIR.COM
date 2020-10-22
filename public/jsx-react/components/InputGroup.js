@@ -13,7 +13,8 @@ const InputGroup = (props) => {
                 disabled={props.disabled}
                 type="text"
                 className="form-control"
-                onChange={($event) => props.handleChange(props.setValue, $event.target.value)}
+                onChange={({target}) => props.handleChange(props.setValue, target.value)}
+                onKeyPress={props.handleKeyPress}
                 value={props.value}
                 placeholder={props.placeholder}
                 required
