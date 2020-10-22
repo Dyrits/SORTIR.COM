@@ -78,7 +78,7 @@ const Ville = ({data}) => {
     return (
         <div>
             <SearchBar onChange={get} />
-            <Table data={villes} headers={headers} hydrate={hydrate} />
+            <Table data={villes} headers={headers} hydrate={hydrate} addLine={true} />
         </div>
     );
 }

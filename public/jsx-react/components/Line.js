@@ -20,8 +20,8 @@ const Line = ({line}) => {
     }
 
     const handleClick = (input) => {
-        if (input.remove) { line.remove(line); }
-        if (input.persist) { update(); }
+        if (input.remove) { return line.remove(line); }
+        if (input.persist) { return update(); }
     }
 
     const handleKeyPress = (key) => { (key === "Enter") && update(); }

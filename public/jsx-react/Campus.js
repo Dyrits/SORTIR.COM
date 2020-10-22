@@ -71,7 +71,7 @@ const Campus = ({data}) => {
     return (
         <div>
             <SearchBar onChange={get} />
-            <Table data={campus} headers={headers} hydrate={hydrate} />
+            <Table data={campus} headers={headers} hydrate={hydrate} addLine={true} />
         </div>
     );
 }
