@@ -47,8 +47,8 @@ const Campus = ({data}) => {
             $campus.buttons = [
                 {
                     persist: true,
-                    value: {"true": "Ajouter", "false": "Ajouter"},
-                    classes: {"true" : "btn btn-success col-5", "false": "btn btn-success col-5"},
+                    value: Helpers.setDefaultValue({}, "Ajouter"),
+                    classes: Helpers.setDefaultValue({}, "btn btn-success col-5"),
                 }
             ]
         } else {
@@ -60,8 +60,8 @@ const Campus = ({data}) => {
                 },
                 {
                     remove: true,
-                    value: {"true": "Supprimer", "false": "Supprimer"},
-                    classes: {"true" : "btn btn-danger col-5 offset-1", "false": "btn btn-danger col-5 offset-1"},
+                    value: Helpers.setDefaultValue({}, "Supprimer"),
+                    classes: Helpers.setDefaultValue({}, "btn btn-danger col-5 offset-1")
                 }
             ]
         }

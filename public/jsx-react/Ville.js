@@ -2,6 +2,8 @@
 
 const Ville = ({data}) => {
 
+
+
     const headers = [
         {label: "Ville", classes: "col-6"},
         {label: "Code postal", classes: "col-2"},
@@ -54,21 +56,21 @@ const Ville = ({data}) => {
             ville.buttons = [
                 {
                     persist: true,
-                    value: {"true": "Ajouter", "false": "Ajouter"},
-                    classes: {"true": "btn btn-success col-5", "false": "btn btn-success col-5"},
+                    value: Helpers.setDefaultValue({}, "Ajouter"),
+                    classes: Helpers.setDefaultValue({}, "btn btn-success col-5")
                 }
             ]
         } else {
             ville.buttons = [
                 {
                     persist: true,
-                    value: {"true": "Modifier", "false": "Valider"},
-                    classes: {"true": "btn btn-info col-5", "false": "btn btn-warning col-5"}
+                    value: {true: "Modifier", false: "Valider"},
+                    classes: {true: "btn btn-info col-5", false: "btn btn-warning col-5"}
                 },
                 {
                     remove: true,
-                    value: {"true": "Supprimer", "false": "Supprimer"},
-                    classes: {"true": "btn btn-danger col-5 offset-1", "false": "btn btn-danger col-5 offset-1"}
+                    value: Helpers.setDefaultValue({}, "Supprimer"),
+                    classes: Helpers.setDefaultValue({}, "btn btn-danger col-5 offset-1")
                 }
             ]
         }

@@ -30,21 +30,20 @@ const Line = ({line}) => {
 
     return (
         <article className="row mb-2">
-            {line.inputs.map((input, index) => {
-                return (
-                    <InputGroup
-                        key={index}
-                        disabled={  disabled}
-                        value={input.value}
-                        setValue={input.setValue}
-                        placeholder={input.placeholder && input.placeholder}
-                        handleChange={handleChange}
-                        handleKeyPress={({key}) => handleKeyPress(key)}
-                        classes={input.classes}
-                        icon={input.icon}
-                    />
-                );
-            })}
+            {line.inputs && line.inputs.map((input, index) =>
+                <InputGroup
+                    key={index}
+                    disabled={  disabled}
+                    value={input.value}
+                    setValue={input.setValue}
+                    placeholder={input.placeholder && input.placeholder}
+                    handleChange={handleChange}
+                    handleKeyPress={({key}) => handleKeyPress(key)}
+                    classes={input.classes}
+                    icon={input.icon}
+                />
+            )}
+            {line.columns && line.columns.map((column, index) => <p key={index}>{column}</p>)}
             <div className={line.actions.classes}>
                 {line.buttons.map((button, index) =>
                     <input

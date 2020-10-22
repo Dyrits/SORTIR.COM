@@ -50,27 +50,18 @@ const Sortie = ({data}) => {
             sortie.organisateur
         ]
         sortie.actions = { classes: "d-none d-lg-flex col-lg-2 input-group mb-3 row" };
-        sortie.buttons = [
-            {
-                value: new Proxy({"Créée": "Modifier"}, {
-                    get: (target, property) =>
-                        target.hasOwnProperty(property) ? target[property] : "Afficher"
-                }),
-                classes: {"true": "btn btn-info col-5", "false": "btn btn-warning col-5"}
+        sortie.buttons = [{
+                value: Helpers.setDefaultValue({"Créée": "Modifier"}, "Afficher"),
+                classes: {true: "btn btn-info col-5", false: "btn btn-warning col-5"}
             }]
-        !["En cours", "Clôturée", "Passée"].includes(sortie.etat) &&
-        sorties.buttons.push(
-            {
+        ["En cours", "Clôturée", "Passée"].includes(sortie.etat) && sortie.buttons.push({
                 value: {
-                    "Ouverte": (
-                        sortie.isOrganisateur ? "Annuler" :
-                        sortie.inscrit ? "Se désister" : "S'inscrire"
-                    ),
-                    "Créée" : "Publier"
+                    "Ouverte": sortie.isOrganisateur ? "Annuler" : sortie.isInscrit ? "Se désister" : "S'inscrire",
+                    "Créée": "Publier"
                 },
-                classes: {"true" : "btn btn-danger col-5 offset-1", "false": "btn btn-danger col-5 offset-1"},
-            }
-        );
+                classes: Helpers.setDefaultValue({}, "btn btn-danger col-5 offset-1")
+        });
+        }
         return sortie;
     }
 
