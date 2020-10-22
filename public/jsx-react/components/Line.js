@@ -14,7 +14,7 @@ const Line = ({line}) => {
             if (!line.inputs.every(input => {
                 values.push(input.value)
                 return input.value;
-            })) { return; }
+            })) { return alert("Veuillez remplir les différents champs et ne pas laisser de valeur vide."); }
             line.persist(id, ...values)
         }
         !line.insert && setDisabled(previous => !previous);
@@ -27,11 +27,10 @@ const Line = ({line}) => {
             if (!line.inputs.every(input => {
                 values.push(input.value)
                 return input.value;
-            })) { return; }
+            })) { return alert("Veuillez remplir les différents champs et ne pas laisser de valeur vide."); }
             line.persist(id, ...values);
             !line.insert && setDisabled(previous => !previous);
         }
-
     }
 
     const handleChange = (setValue, value) => { setValue(value); }
