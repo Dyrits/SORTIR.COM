@@ -36,10 +36,10 @@ const Sortie = ({data}) => {
     }
 
     const hydrate = (sortie = null, insert = false) => {
-        // @todo: Get the list of participants.
-        sortie.participation = `${sortie.participants}/${sortie.nbInscriptionsMax}`;
-        sortie.isInscrit = sortie.participants.includes(partipant) && "X";
-        sortie.isOrganisateur = sortie.organisateur === partipant;
+        // @todo: Get the list of participants ID.
+        sortie.participation = `${sortie.participants.length}/${sortie.nbInscriptionsMax}`;
+        sortie.isInscrit = sortie.participants.includes(partipant.id) && "X";
+        sortie.isOrganisateur = sortie.organisateur.id === partipant.id;
         sortie.columns = [
             sortie.nom,
             sortie.dateHeureDebut,
