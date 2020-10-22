@@ -61,7 +61,6 @@ const Sortie = ({data}) => {
                 },
                 classes: Helpers.setDefaultValue({}, "btn btn-danger col-5 offset-1")
         });
-        }
         return sortie;
     }
 
