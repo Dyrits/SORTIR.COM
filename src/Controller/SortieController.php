@@ -52,9 +52,13 @@ class SortieController extends AbstractController
             $redirection = "sortie_display";
             $sortie->setOrganisateur($this->getUser());
             $sortie->setSiteOrganisateur($this->getUser()->getCampus());
-            if ($sortieForm->get('save')->isClicked()) { $redirection = "sortie_persist"; }
+            if ($sortie->getEtat()) { $status = $sortie->getEtat(); }
+            if ($sortieForm->get('save')->isClicked()) {
+                $status = 1;
+                $redirection = "sortie_persist";
+            }
             else if ($sortieForm->get('publish')->isClicked()) { $status = 2; }
-            else if ($sortieForm->get('delete')->isClicked()) { $status = 3; }
+            else if ($sortieForm->get('delete')->isClicked()) { $status = 6; }
             $sortie->setEtat($etat->find($status));
             $this->manager->persist($sortie);
             $this->manager->flush();

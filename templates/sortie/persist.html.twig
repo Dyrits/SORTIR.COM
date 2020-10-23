@@ -21,6 +21,7 @@
           {% endif %}
         {% endfor %}
         <div class="form-group">
+            {# @todo: If the activity has already been published, the button should be "Mettre à jour". #}
             {{ form_widget(sortieForm.save, {'attr': {'class': 'btn btn-info'}}) }}
             {{ form_widget(sortieForm.publish, {'attr': {'class': 'btn btn-success mx-2'}}) }}
             {% if sortie.id is not null %}
