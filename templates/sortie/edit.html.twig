@@ -1,15 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ parent() }} |
+    {% if sortie.id is not null %}
+    Éditer ({{ sortie.nom }})
+    {% else %}
+    Créer une sortie
+    {% endif %} {% endblock %}
 {% block main %}
-    <h1>Créer/Éditer une sortie</h1>
+    <h1>
+        {% if sortie.id is not null %}
+            Éditer la sortie | {{ sortie.nom }}
+        {% else %}
+            Créer une sortie
+        {% endif %}
+    </h1>
     {{ form_start(sortieForm) }}
     {{ form_widget(sortieForm) }}
-    <button type="submit">Enregistrer</button>
-    {% if sortie is defined %}
-    <button type="submit" name="delete">Supprimer</button>
+
+    <button type="submit" name="submit" value="save">Enregistrer</button>
+    <button type="submit" name="submit" value="publish">Publier</button>
+    {% if sortie.id is not null %}
+    <button type="submit" name="submit" value="delete">Supprimer</button>
     {% endif %}
     <button type="reset">Annuler</button>
     {{ form_end(sortieForm) }}
 {% endblock %}
-
-{% block title %}Mon profil | {{ parent() }}{% endblock %}

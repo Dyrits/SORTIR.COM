@@ -35,13 +35,14 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/sortie/edit", name="sortie_persist", requirements={"id": "\d+"})
-     * @Route("/sortie/edit/{id}", name="sortie_persist", requirements={"id": "\d+"})
+     * @Route("/sortie/{id}/edit", name="sortie_persist", requirements={"id": "\d+"}, defaults={"id": 0})
      * @param int $id
      * @param Request $request
+     * @param EtatRepository $etat
+     * @param ParticipantRepository $participant
      * @return RedirectResponse|Response
      */
-    public function persist($id = 0, Request $request, EtatRepository $etat, ParticipantRepository $participant) {
+    public function persist(int $id, Request $request, EtatRepository $etat, ParticipantRepository $participant) {
         $sortie = new Sortie();
         if ($id) { $sortie =  $this->repository->find($id); }
         if (!$sortie) { return $this->redirectToRoute("sortie_persist"); }
@@ -57,7 +58,7 @@ class SortieController extends AbstractController
             $this->manager->flush();
             return $this->redirectToRoute("sortie_display", ["id" => $sortie->getId()]);
         }
-        return $this->render("sortie/edit.html.twig", ["sortieForm" => $sortieForm->createView()]);
+        return $this->render("sortie/edit.html.twig", ["sortieForm" => $sortieForm->createView(), "sortie" => $sortie]);
     }
 
     /**
