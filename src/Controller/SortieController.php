@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use App\Service\SortieService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,11 +19,13 @@ class SortieController extends AbstractController
 {
     private $repository;
     private $manager;
+    private $service;
 
-    public function __construct(EntityManagerInterface $manager, SortieRepository $repository)
+    public function __construct(EntityManagerInterface $manager, SortieRepository $repository, SortieService $service)
     {
         $this->repository = $repository;
         $this->manager = $manager;
+        $this->service = $service;
     }
 
     /**
@@ -38,19 +42,19 @@ class SortieController extends AbstractController
      * @Route("/sortie/{id}/persist", name="sortie_persist", requirements={"id": "\d+"}, defaults={"id": 0})
      * @param int $id
      * @param Request $request
-     * @param EtatRepository $etat
      * @return RedirectResponse|Response
      */
     public function persist(int $id, Request $request, EtatRepository $etat) {
         // Checking if the already entity exists, is still available to update, and was made by the current user.
         // Redirecting to different routes if one is not the case.
         $sortie = new Sortie();
-        if ($id) { $sortie =  $this->repository->find($id); }
+        if ($id) {
+            $sortie = $this->repository->find($id);
+            if ($sortie && !$this->service->isEditable($sortie, $this->getUser())) {
+                return $this->redirectToRoute("sortie_display", ["id" => $sortie->getId()]);
+            }
+        }
         if (!$sortie) { return $this->redirectToRoute("sortie_persist"); }
-        else if (
-            in_array($sortie->getEtat()->getId(), [3, 4, 5]) ||
-            $sortie->getOrganisateur() !== $this->getUser()
-        ) { return $this->redirectToRoute("sortie_display", ["id" => $sortie->getId()]); }
 
         // Creating the form and handling the request.
         $sortieForm =$this->createForm(SortieType::class, $sortie );
@@ -70,7 +74,7 @@ class SortieController extends AbstractController
                 $status = 1;
                 $redirection = "sortie_persist";
             }
-            // @todo: Create a service to set the field "etat" according to the dates.
+            // @todo: Create a service to set the field "etat" according to the dates when publishing.
             else if ($sortieForm->get('publish')->isClicked()) { $status = 2; }
             else if ($sortieForm->get('delete')->isClicked()) { $status = 6; }
             $sortie->setEtat($etat->find($status));
