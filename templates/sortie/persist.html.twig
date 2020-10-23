@@ -15,12 +15,19 @@
         {% endif %}
     </h1>
     {{ form_start(sortieForm) }}
-    {{ form_widget(sortieForm) }}
-    <button type="submit" name="submit" value="save">Enregistrer</button>
-    <button type="submit" name="submit" value="publish">Publier</button>
-    {% if sortie.id is not null %}
-    <button type="submit" name="submit" value="delete">Supprimer</button>
-    {% endif %}
-    <button type="reset">Annuler</button>
-    {{ form_end(sortieForm) }}
+        {% for input in sortieForm %}
+          {% if input.vars.block_prefixes.1 != 'submit' %}
+                {{ form_row(input) }}
+          {% endif %}
+        {% endfor %}
+        <div class="form-group">
+            {{ form_widget(sortieForm.save, {'attr': {'class': 'btn btn-info'}}) }}
+            {{ form_widget(sortieForm.publish, {'attr': {'class': 'btn btn-success mx-2'}}) }}
+            {% if sortie.id is not null %}
+                {{ form_widget(sortieForm.delete, {'attr': {'class': 'btn btn-danger mx-2'}}) }}
+            {% endif %}
+            <button type="reset" class="btn-warning btn mx-2">Annuler</button>
+        </div>
+    {{ form_errors(sortieForm) }}
+
 {% endblock %}

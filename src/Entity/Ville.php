@@ -99,7 +99,7 @@ class Ville
         return $this;
     }
 
-    public function getNomComplet() {
+    public function getLabel() {
         return "$this->nom ($this->codePostal)";
     }
 }

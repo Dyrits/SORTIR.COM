@@ -35,7 +35,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/sortie/{id}/edit", name="sortie_persist", requirements={"id": "\d+"}, defaults={"id": 0})
+     * @Route("/sortie/{id}/persist", name="sortie_persist", requirements={"id": "\d+"}, defaults={"id": 0})
      * @param int $id
      * @param Request $request
      * @param EtatRepository $etat
@@ -49,16 +49,18 @@ class SortieController extends AbstractController
         $sortieForm =$this->createForm(SortieType::class, $sortie );
         $sortieForm->handleRequest($request);
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
-            // @todo: Set the parameters according to the current user and the status:
-            $sortie->setEtat($etat->find(1));
-            $organisateur = $participant->find(1);
-            $sortie->setOrganisateur($participant->find(1));
-            $sortie->setSiteOrganisateur($organisateur->getCampus());
+            $redirection = "sortie_display";
+            $sortie->setOrganisateur($this->getUser());
+            $sortie->setSiteOrganisateur($this->getUser()->getCampus());
+            if ($sortieForm->get('save')->isClicked()) { $redirection = "sortie_persist"; }
+            else if ($sortieForm->get('publish')->isClicked()) { $status = 2; }
+            else if ($sortieForm->get('delete')->isClicked()) { $status = 3; }
+            $sortie->setEtat($etat->find($status));
             $this->manager->persist($sortie);
             $this->manager->flush();
-            return $this->redirectToRoute("sortie_display", ["id" => $sortie->getId()]);
+             return $this->redirectToRoute($redirection, ["id" => $sortie->getId()]);
         }
-        return $this->render("sortie/edit.html.twig", ["sortieForm" => $sortieForm->createView(), "sortie" => $sortie]);
+        return $this->render("sortie/persist.html.twig", ["sortieForm" => $sortieForm->createView(), "sortie" => $sortie]);
     }
 
     /**
