@@ -2,6 +2,8 @@
 
 const Ville = ({data}) => {
 
+
+
     const headers = [
         {label: "Ville", classes: "col-6"},
         {label: "Code postal", classes: "col-2"},
@@ -53,20 +55,22 @@ const Ville = ({data}) => {
         if (insert) {
             ville.buttons = [
                 {
-                    value: {"true": "Ajouter", "false": "Ajouter"},
-                    classes: {"true": "btn btn-success col-5", "false": "btn btn-success col-5"},
+                    persist: true,
+                    value: Helpers.setDefaultValue({}, "Ajouter"),
+                    classes: Helpers.setDefaultValue({}, "btn btn-success col-5")
                 }
             ]
         } else {
             ville.buttons = [
                 {
-                    value: {"true": "Modifier", "false": "Valider"},
-                    classes: {"true": "btn btn-info col-5", "false": "btn btn-warning col-5"}
+                    persist: true,
+                    value: {true: "Modifier", false: "Valider"},
+                    classes: {true: "btn btn-info col-5", false: "btn btn-warning col-5"}
                 },
                 {
-                    value: {"true": "Supprimer", "false": "Supprimer"},
                     remove: true,
-                    classes: {"true": "btn btn-danger col-5 offset-1", "false": "btn btn-danger col-5 offset-1"}
+                    value: Helpers.setDefaultValue({}, "Supprimer"),
+                    classes: Helpers.setDefaultValue({}, "btn btn-danger col-5 offset-1")
                 }
             ]
         }
@@ -76,7 +80,7 @@ const Ville = ({data}) => {
     return (
         <div>
             <SearchBar onChange={get} />
-            <Table data={villes} headers={headers} hydrate={hydrate} />
+            <Table data={villes} headers={headers} hydrate={hydrate} addLine={true} />
         </div>
     );
 }

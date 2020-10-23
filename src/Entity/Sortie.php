@@ -45,7 +45,7 @@ class Sortie
     private $duree;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $dateLimiteInscription;
 
@@ -72,7 +72,7 @@ class Sortie
     private $siteOrganisateur;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $lieu;

@@ -7,52 +7,43 @@ const Line = ({line}) => {
 
     line.inputs.forEach(input => { [input.value, input.setValue] = React.useState(input.value); })
 
-    const handleClick = (input) => {
-        if (input.remove) { line.remove(line); }
-        else if (!line.disabled) {
+    const update = () => {
+        if (!line.disabled) {
             const values = [];
             if (!line.inputs.every(input => {
                 values.push(input.value)
                 return input.value;
-            })) { return; }
+            })) { return alert("Veuillez remplir les différents champs et ne pas laisser de valeur vide."); }
             line.persist(id, ...values)
         }
         !line.insert && setDisabled(previous => !previous);
-
     }
 
-    const handleKeyPress = (key) => {
-        if (key === "Enter" && !line.disabled) {
-            const values = [];
-            if (!line.inputs.every(input => {
-                values.push(input.value)
-                return input.value;
-            })) { return; }
-            line.persist(id, ...values);
-            !line.insert && setDisabled(previous => !previous);
-        }
-
+    const handleClick = (input) => {
+        if (input.remove) { return line.remove(line); }
+        if (input.persist) { return update(); }
     }
+
+    const handleKeyPress = (key) => { (key === "Enter") && update(); }
 
     const handleChange = (setValue, value) => { setValue(value); }
 
     return (
         <article className="row mb-2">
-            {line.inputs.map((input, index) => {
-                return (
-                    <InputGroup
-                        key={index}
-                        disabled={  disabled}
-                        value={input.value}
-                        setValue={input.setValue}
-                        placeholder={input.placeholder && input.placeholder}
-                        handleChange={handleChange}
-                        handleKeyPress={({key}) => handleKeyPress(key)}
-                        classes={input.classes}
-                        icon={input.icon}
-                    />
-                );
-            })}
+            {line.inputs && line.inputs.map((input, index) =>
+                <InputGroup
+                    key={index}
+                    disabled={  disabled}
+                    value={input.value}
+                    setValue={input.setValue}
+                    placeholder={input.placeholder && input.placeholder}
+                    handleChange={handleChange}
+                    handleKeyPress={({key}) => handleKeyPress(key)}
+                    classes={input.classes}
+                    icon={input.icon}
+                />
+            )}
+            {line.columns && line.columns.map((column, index) => <p key={index}>{column}</p>)}
             <div className={line.actions.classes}>
                 {line.buttons.map((button, index) =>
                     <input

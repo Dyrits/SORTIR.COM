@@ -46,20 +46,22 @@ const Campus = ({data}) => {
         if (insert) {
             $campus.buttons = [
                 {
-                    value: {"true": "Ajouter", "false": "Ajouter"},
-                    classes: {"true" : "btn btn-success col-5", "false": "btn btn-success col-5"},
+                    persist: true,
+                    value: Helpers.setDefaultValue({}, "Ajouter"),
+                    classes: Helpers.setDefaultValue({}, "btn btn-success col-5"),
                 }
             ]
         } else {
             $campus.buttons = [
                 {
+                    persist: true,
                     value: {"true": "Modifier", "false": "Valider"},
                     classes: {"true": "btn btn-info col-5", "false": "btn btn-warning col-5"}
                 },
                 {
-                    value: {"true": "Supprimer", "false": "Supprimer"},
                     remove: true,
-                    classes: {"true" : "btn btn-danger col-5 offset-1", "false": "btn btn-danger col-5 offset-1"},
+                    value: Helpers.setDefaultValue({}, "Supprimer"),
+                    classes: Helpers.setDefaultValue({}, "btn btn-danger col-5 offset-1")
                 }
             ]
         }
@@ -69,7 +71,7 @@ const Campus = ({data}) => {
     return (
         <div>
             <SearchBar onChange={get} />
-            <Table data={campus} headers={headers} hydrate={hydrate} />
+            <Table data={campus} headers={headers} hydrate={hydrate} addLine={true} />
         </div>
     );
 }

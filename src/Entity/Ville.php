@@ -100,4 +100,8 @@ class Ville
 
         return $this;
     }
+
+    public function getNomComplet() {
+        return "$this->nom ($this->codePostal)";
+    }
 }
