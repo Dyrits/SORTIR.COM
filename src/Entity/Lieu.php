@@ -177,4 +177,10 @@ class Lieu
 
         return $this;
     }
+
+    public function getLabel() {
+        $label = $this->ville->getLabel()." - $this->rue | $this->nom";
+        if ($this->latitude && $this->longitude) { $label = $label." | $this->latitude & $this->longitude"; }
+        return $label;
+    }
 }

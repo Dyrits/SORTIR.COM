@@ -50,15 +50,22 @@ class VilleController extends AbstractController
      * @return Response
      */
     public function persist(Request $request) {
+        // Getting the data from the JSON.
         $json = json_decode($request->getContent());
         $id = array_key_exists("id", $json) ? $id = $json->id : null;
         $nom = $json->nom;
         $codePostal = $json->codePostal;
+
+        // Checking if the entity exists and creating a new one if not.
         $ville = $id ? $this->repository->find($json->id) : new Ville();
         $ville->setNom($nom);
         $ville->setCodePostal($codePostal);
+
+        // Persisting the entity.
         $this->manager->persist($ville);
         $this->manager->flush();
+
+        // Returning a JSON Response.
         return $this->json($ville);
     }
 
