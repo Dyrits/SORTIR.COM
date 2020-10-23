@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>Créer/Éditer une sortie</h1>
+    {{ form_start(sortieForm) }}
+    {{ form_widget(sortieForm) }}
+    <button type="submit" name="save">Enregistrer</button>
+    <button type="submit" name="publish">Publier</button>
+    {% if sortie is defined %}
+    <button type="submit" name="delete">Supprimer</button>
+    {% endif %}
+    <button type="reset">Annuler</button>
+    {{ form_end(sortieForm) }}
+{% endblock %}
+
+{% block title %}Mon profil | {{ parent() }}{% endblock %}
