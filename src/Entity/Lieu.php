@@ -6,6 +6,7 @@ use App\Repository\LieuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LieuRepository::class)
@@ -21,16 +22,18 @@ class Lieu
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  @Assert\NotBlank(message="Veuillez remplir le champs requis avec le nom de votre lieu")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $rue;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="lieus")
+     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="lieux")
      * @ORM\JoinColumn(nullable=false)
      */
     private $ville;

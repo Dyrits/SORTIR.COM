@@ -21,13 +21,15 @@ class Campus
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="Veuillez indiquer le nom de votre campus")
+     * @Assert\Length(min="5", max="100")
      */
     private $nom;
 
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="siteOrganisateur")
+     * @Assert\NotBlank(message="Veuillez remplir le champs requis")
      */
     private $sorties;
 
