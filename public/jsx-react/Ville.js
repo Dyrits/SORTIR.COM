@@ -42,13 +42,15 @@ const Ville = ({data}) => {
                 value: ville.nom || String(),
                 placeholder: insert ? "Ville~" : String(),
                 classes: "col-lg-6 col-12",
-                icon: "fas fa-city"
+                icon: "fas fa-city",
+                validation: /\D+/
             },
             {
                 value: ville.codePostal || String(),
                 placeholder: insert ? "Code postal~" : String(),
                 classes: "col-lg-2 col-6",
-                icon: "fas fa-mail-bulk"
+                icon: "fas fa-mail-bulk",
+                validation: /\d{5}/
             }
         ];
         ville.actions = { classes: "col-lg-3 col-6 input-group mb-3 row" };

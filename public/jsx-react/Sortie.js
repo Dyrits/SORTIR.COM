@@ -38,8 +38,8 @@ const Sortie = ({data}) => {
     const hydrate = (sortie = null, insert = false) => {
         // @todo: Get the list of participants ID.
         sortie.participation = `${sortie.participants.length}/${sortie.nbInscriptionsMax}`;
-        sortie.isInscrit = sortie.participants.includes(partipant.id) && "X";
-        sortie.isOrganisateur = sortie.organisateur.id === partipant.id;
+        sortie.isInscrit = sortie.participants.includes(partipant) && "X";
+        sortie.isOrganisateur = sortie.organisateur === partipant;
         sortie.columns = [
             sortie.nom,
             sortie.dateHeureDebut,
@@ -55,7 +55,8 @@ const Sortie = ({data}) => {
                 value: Helpers.setDefaultValue({"Créée": "Modifier"}, "Afficher"),
                 classes: {true: "btn btn-info col-5", false: "btn btn-warning col-5"}
             }]
-        ["En cours", "Clôturée", "Passée"].includes(sortie.etat) && sortie.buttons.push({
+        ["En cours", "Clôturée", "Passée"].includes(sortie.etat.nom) &&
+        sortie.buttons.push({
                 value: {
                     "Ouverte": sortie.isOrganisateur ? "Annuler" : sortie.isInscrit ? "Se désister" : "S'inscrire",
                     "Créée": "Publier"

@@ -11,9 +11,10 @@ const Line = ({line}) => {
         if (!line.disabled) {
             const values = [];
             if (!line.inputs.every(input => {
+                let isValid = input.validation && input.value.match(input.validation)
                 values.push(input.value)
-                return input.value;
-            })) { return alert("Veuillez remplir les différents champs et ne pas laisser de valeur vide."); }
+                return input.value && isValid;
+            })) { return alert("Veuillez remplir les différents champs avec des valeurs valides."); }
             line.persist(id, ...values)
         }
         !line.insert && setDisabled(previous => !previous);

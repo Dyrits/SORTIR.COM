@@ -39,7 +39,8 @@ const Campus = ({data}) => {
                 value: $campus.nom || String(),
                 placeholder: insert ? "Campus~" : String(),
                 classes: "col-lg-8 col-12",
-                icon: "fas fa-university"
+                icon: "fas fa-university",
+                validation: /\D+/
             }
         ];
         $campus.actions = { classes: "col-lg-3 col-6 input-group mb-3 row" };
