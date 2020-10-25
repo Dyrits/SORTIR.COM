@@ -28,6 +28,9 @@ class Etat
 
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="etat")
+     * @Assert\Length(min="5", max="255",
+     *                minMessage= "Votre nom de sortie doit au moins de {{ limit }} caractères",
+     *                maxMessage= "Votre nom de sortie doit avoir au maximum {{ limit }} caractères")
      */
     private $sorties;
 

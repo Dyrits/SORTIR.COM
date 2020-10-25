@@ -24,12 +24,14 @@ class Lieu
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="Veuillez remplir le champs requis avec le nom de votre lieu")
      * @Assert\Length(min="3", max="100")
+     * @Assert\Type("string")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="3", max="100")
+     * @Assert\Type("string")
      */
     private $rue;
 
@@ -37,6 +39,7 @@ class Lieu
      * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="lieux")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Length(min="2", max="100")
+     * @Assert\Type("string")
      */
     private $ville;
 
@@ -74,6 +77,8 @@ class Lieu
 
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="lieu")
+     * @Assert\Type("string")
+     * @Assert\NotBlank(message="Veuillez remplir le champs requis")
      */
     private $sorties;
 

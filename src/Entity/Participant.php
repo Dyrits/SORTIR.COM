@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ParticipantRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ParticipantRepository", repositoryClass=ParticipantRepository::class)
  * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
  */
 class Participant implements UserInterface
@@ -24,8 +24,9 @@ class Participant implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank(message="Veuillez indiquer le nom de votre pseudo")
+     * @Assert\Length(max="100")
      */
     private $pseudo;
 
@@ -37,26 +38,42 @@ class Participant implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Type(type={"alpha", "digit"})
+     * @TODO : voir comment faire assert : REGEx ?
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Veuillez indiquer votre nom")
+     * @Assert\Length(min="2", max="100"
+     *                minMessage= "Votre nom doit avoir au moins {{ limit }} caractères",
+     *                maxMessage= "Votre nom doit avoir au maximum {{ limit }} caractères")
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Veuillez indiquer votre prénom")
+     * @Assert\Length(min="2", max="50"
+     *                minMessage= "Votre prénom doit avoir au moins {{ limit }} caractères",
+     *                maxMessage= "Votre prénom doit avoir au maximum {{ limit }} caractères")
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=15, nullable=true)
+     * @Assert\NotBlank(message="Veuillez indiquer votre numéro de téléphone")
+     * @Assert\Length(max="50", maxMessage= "Votre prénom doit avoir au maximum {{ limit }} caractères")
+     * @TODO : Voir REGEX pour num tel : #^0[1-68][0-9]{8}$#
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message= "L'email saisie '{{ value }}' n'est pas valide)
+     * @Assert\NotBlank(message="Veuillez saisir votre email")
+     * @Assert\Type(mode:loose)
      */
     private $email;
 
