@@ -65,7 +65,7 @@ const Sortie = ({data}) => {
                 value: Helpers.setDefaultValue({"Créée": "Modifier"}, "Afficher"),
                 classes: {true: "btn btn-info col-5", false: "btn btn-warning col-5"},
                 link: Helpers.setDefaultValue(
-                    {"Créée" : `http://localhost/sortir.com/public/sortie/${sortie.id}/persist`/},
+                    {"Créée" : `http://localhost/sortir.com/public/sortie/${sortie.id}/persist`},
                     `http://localhost/sortir.com/public/sortie/${sortie.id}`
                     )
             }]
