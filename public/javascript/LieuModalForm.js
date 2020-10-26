@@ -19,10 +19,9 @@ addButton.click(() => {
     const latitude = $("#latitude-lieu").val()
     const longitude = $("#longitude-lieu").val()
     const data = {nom, rue, ville, latitude, longitude};
-    console.log(data);
+    // Call the API:
     Ajax.persist("/lieu/api", data).then(lieu => {
-        console.log(nom);
-        console.log(longitude);
+        // Add the new entity to the options:
         const labelVille = `${lieu.ville.nom} (${lieu.ville.codePostal})`;
         const labelCoordinates = lieu.latitude && lieu.longitude ? `| {${lieu.latitude} - ${lieu.longitude}}` : "";
         const labelLieu = `${lieu.rue} | ${lieu.nom} ${labelCoordinates}`
