@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\SortieType;
-use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Service\SortieService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class SortieController extends AbstractController
 {
@@ -92,11 +92,34 @@ class SortieController extends AbstractController
     /**
      * @Route("/sorties/api", name="sorties_list", methods={"GET"})
      * @param Request $request
+     * @param SerializerInterface $serializer
      * @return Response
      */
-    public function list(Request $request) {
-        // @todo: Create a query to get the entities according to the different filters in the request body.
+    public function list(Request $request, SerializerInterface $serializer) {
+//        $participant = $request->get("participant");
+//        $nom = $request->get("nom") ? $request->get("nom") : "" ;
+//        $campus = $request->get("campus");
+//        $from = $request->get("from");
+//        $to = $request->get("to");
+//        $isOrganisateur = $request->get("isOrganisateur");
+//        $isInscrit = $request->get("isInscrit");
+//        $isNotInscrit = $request->get("isNotInscrit");
+//        $isFinie = $request->get("isFinie");
         $sorties = $this->repository->findAll();
-        return $this->json($sorties);
+        // Returning a JSON Response.
+        $response = new Response();
+        $response->headers->set("Content-Type", "application/json");
+        $json = $serializer->serialize($sorties, "json", ["groups" => "sortie"]);
+        $response->setContent($json);
+        return $response;
+    }
+
+    /**
+     * @Route("/", name="sorties_display")
+     * @param Request $request
+     * @return Response
+     */
+    public function home(Request $request) {
+        return $this->render("sortie/sorties.html.twig");
     }
 }

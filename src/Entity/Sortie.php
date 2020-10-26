@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Sortie
 {
     /**
+     * @Groups("sortie")
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,6 +23,7 @@ class Sortie
     private $id;
 
     /**
+     * @Groups("sortie")
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min = 2,max = 255,
      *     minMessage= "Votre nom de sortie doit au moins de {{ limit }} caractères.",
@@ -29,6 +32,7 @@ class Sortie
     private $nom;
 
     /**
+     * @Groups("sortie")
      * @ORM\Column(type="datetime")
      * @Assert\DateTime(message="La date entrée n'est pas valide.")
      * @Assert\GreaterThanOrEqual("now")
@@ -36,51 +40,60 @@ class Sortie
     private $dateHeureDebut;
 
     /**
+     * @Groups("sortie")
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("integer")
      */
     private $duree;
 
     /**
+     * @Groups("sortie")
      * @ORM\Column(type="date")
      */
     private $dateLimiteInscription;
 
     /**
+     * @Groups("sortie")
      * @ORM\Column(type="integer")
      */
     private $nbInscriptionsMax;
 
     /**
+     * @Groups("sortie")
      * @ORM\Column(type="text", nullable=true)
      */
     private $infosSortie;
 
     /**
+     * @Groups("sortie")
      * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
      * @ORM\JoinColumn(nullable=false)
      */
     private $etat;
 
     /**
+     * @Groups("sortie")
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
      * @ORM\JoinColumn(nullable=false)
      */
     private $siteOrganisateur;
 
     /**
+     * @Groups("sortie")
      * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
      * @ORM\JoinColumn(nullable=false)
      */
     private $lieu;
 
     /**
+     * @Groups("sortie")
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortiesOrganisees")
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;
 
     /**
+     * @Groups("sortie")
      * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties")
      */
     private $participants;

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} | Villes{% endblock %}
+{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset("css/app.css") }}">{% endblock %}
+
+{% block main %}
+    <h2>Filtrer les sorties</h2>
+    <div id="table"></div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include("./includes/react-jsx.html.twig") %}
+    <script type="text/babel" src="{{ asset("jsx-react/Sortie.js") }}"></script>
+{%  endblock %}

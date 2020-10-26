@@ -29,6 +29,8 @@ const Line = ({line}) => {
 
     const handleChange = (setValue, value) => { setValue(value); }
 
+    console.log(line.columns);
+
     return (
         <article className="row mb-2">
             {line.inputs && line.inputs.map((input, index) =>

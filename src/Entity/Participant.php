@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Participant implements UserInterface
 {
     /**
+     * @Groups("sortie")
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -25,6 +27,7 @@ class Participant implements UserInterface
     private $id;
 
     /**
+     * @Groups("sortie")
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank(message="Veuillez indiquer un pseudonyme.")
      * @Assert\Length(max="100")

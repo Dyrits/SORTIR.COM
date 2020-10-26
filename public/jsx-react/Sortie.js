@@ -45,17 +45,18 @@ const Sortie = ({data}) => {
             sortie.dateHeureDebut,
             sortie.dateLimiteInscription,
             sortie.participation,
-            sortie.etat,
+            sortie.etat.libelle,
             sortie.isInscrit,
-            sortie.organisateur,
-            sortie.lieu
+            sortie.organisateur.pseudo,
+            sortie.lieu.nom
         ]
+        sortie.inputs = [];
         sortie.actions = { classes: "d-none d-lg-flex col-lg-2 input-group mb-3 row" };
         sortie.buttons = [{
                 value: Helpers.setDefaultValue({"Créée": "Modifier"}, "Afficher"),
                 classes: {true: "btn btn-info col-5", false: "btn btn-warning col-5"}
             }]
-        ["En cours", "Clôturée", "Passée"].includes(sortie.etat.nom) &&
+        new Array("En cours", "Clôturée", "Passée").includes(sortie.etat.libelle) &&
         sortie.buttons.push({
                 value: {
                     "Ouverte": sortie.isOrganisateur ? "Annuler" : sortie.isInscrit ? "Se désister" : "S'inscrire",
