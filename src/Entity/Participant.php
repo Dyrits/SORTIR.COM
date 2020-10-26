@@ -46,7 +46,7 @@ class Participant implements UserInterface
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="Veuillez indiquer votre nom")
-     * @Assert\Length(min="2", max="100"
+     * @Assert\Length(min="2", max="100",
      *                minMessage= "Votre nom doit avoir au moins {{ limit }} caractères",
      *                maxMessage= "Votre nom doit avoir au maximum {{ limit }} caractères")
      */
@@ -55,7 +55,7 @@ class Participant implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="Veuillez indiquer votre prénom")
-     * @Assert\Length(min="2", max="50"
+     * @Assert\Length(min="2", max="50",
      *                minMessage= "Votre prénom doit avoir au moins {{ limit }} caractères",
      *                maxMessage= "Votre prénom doit avoir au maximum {{ limit }} caractères")
      */

@@ -39,6 +39,6 @@ security:
 #        - { path: ^/, roles: USER }
 
     role_hierarchy:
-        # @TODO :
+        # @todo: Create the hierarchy.
 
     access_denied_url: /
