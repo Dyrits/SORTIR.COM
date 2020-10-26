@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ parent() }} | Villes{% endblock %}
 {% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset("css/app.css") }}">{% endblock %}
-
 {% block main %}
     <h2>Filtrer les sorties</h2>
     <div id="table"></div>
+    <input type="hidden" value="{{ app.user.id }}" id="app-user" />
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

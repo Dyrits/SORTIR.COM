@@ -2,7 +2,7 @@
 
 const Ville = ({data}) => {
 
-
+    // CONSTANTS & STATES
 
     const headers = [
         {label: "Ville", classes: "col-6"},
@@ -11,6 +11,9 @@ const Ville = ({data}) => {
     ]
 
     const [villes, setVilles] = React.useState(data);
+
+
+    // METHODS
 
     const remove = (ville) => {
         if (confirm(`Confirmez-vous la suppression de la ville ${ville.nom} avec le code postal ${ville.codePostal} ?`)) {
@@ -79,10 +82,13 @@ const Ville = ({data}) => {
         return ville;
     }
 
+
+    // RENDER
+
     return (
         <div>
             <SearchBar onChange={get} />
-            <Table data={villes} headers={headers} hydrate={hydrate} addLine={true} />
+            <Table data={villes} headers={headers} hydrate={hydrate} insertLine={true} />
         </div>
     );
 }

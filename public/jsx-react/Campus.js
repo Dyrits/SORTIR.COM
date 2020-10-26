@@ -2,12 +2,17 @@
 
 const Campus = ({data}) => {
 
+    // CONSTANTS & STATES
+
     const headers = [
         {label: "Campus", classes: "col-8"},
         {label: "Actions", classes: "col-3"},
     ]
 
     const [campus, setCampus] = React.useState(data);
+
+
+    // METHODS
 
     const remove = ($campus) => {
         if (confirm(`Confirmez-vous la suppression du campus ${$campus.nom} ?`)) {
@@ -69,10 +74,13 @@ const Campus = ({data}) => {
         return $campus;
     }
 
+
+    // RENDER
+
     return (
         <div>
             <SearchBar onChange={get} />
-            <Table data={campus} headers={headers} hydrate={hydrate} addLine={true} />
+            <Table data={campus} headers={headers} hydrate={hydrate} insertLine={true} />
         </div>
     );
 }

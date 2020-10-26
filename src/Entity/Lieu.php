@@ -23,7 +23,7 @@ class Lieu
     private $id;
 
     /**
-     * @Groups("lieu")
+     * @Groups({"sortie", "lieu"})
      * @ORM\Column(type="string", length=255)
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="Veuillez remplir le champs requis avec le nom du lieu.")

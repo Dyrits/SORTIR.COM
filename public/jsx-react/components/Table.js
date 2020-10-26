@@ -1,6 +1,6 @@
 "use strict";
 
-const Table = ({data, headers, hydrate, addLine}) => {
+const Table = ({data, headers, hydrate, addLine: insertLine}) => {
     data.forEach(line => { hydrate(line, false) });
     return (
         <section className="vh-100">
@@ -10,7 +10,7 @@ const Table = ({data, headers, hydrate, addLine}) => {
             <section className="lines">
                 { data.map(line => <Line key={line.id} line={line}/>) }
             </section>
-            {addLine &&
+            {insertLine &&
             <section className="mt-2">
                 <Line line={hydrate()} />
             </section>
