@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LieuRepository::class)
@@ -24,12 +25,18 @@ class Lieu
     /**
      * @Groups("lieu")
      * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Veuillez remplir le champs requis avec le nom de votre lieu")
+     * @Assert\Length(min="3", max="100")
+     * @Assert\Type("string")
      */
     private $nom;
 
     /**
      * @Groups("lieu")
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="3", max="100")
+     * @Assert\Type("string")
      */
     private $rue;
 
@@ -37,23 +44,49 @@ class Lieu
      * @Groups("lieu")
      * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="lieus", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Length(min="2", max="100")
+     * @Assert\Type("string")
      */
     private $ville;
 
     /**
      * @Groups("lieu")
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Type(
+     * type="float",
+     * message="Veuillez insérer une latitude."
+     * )
+     * @Assert\Range(
+     * min = 10,
+     * max = 30,
+     * minMessage = "Vous devez insérer une latitude de {{ limit }} caractères minimum",
+     * maxMessage = "Vous devez insérer une latitude de {{ limit }} caractères maximum"
+     * )
+     * @TODO : A voir si cet assert est ok : format d'une latitude/longitude
      */
     private $latitude;
 
     /**
      * @Groups("lieu")
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Type(
+     * type="float",
+     * message="Veuillez insérer une longitude."
+     * )
+     * @Assert\Range(
+     * min = 10,
+     * max = 30,
+     * minMessage = "Vous devez insérer une longitude de {{ limit }} caractères minimum",
+     * maxMessage = "Vous devez insérer une longitude de {{ limit }} caractères maximum"
+     * )
+     * @TODO : A voir si cet assert est ok : format d'une latitude/longitude
      */
     private $longitude;
 
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="lieu")
+     * @Assert\Type("string")
+     * @Assert\NotBlank(message="Veuillez remplir le champs requis")
      */
     private $sorties;
 
@@ -160,7 +193,7 @@ class Lieu
 
     public function getLabel() {
         $label = $this->ville->getLabel()." - $this->rue | $this->nom";
-        if ($this->latitude && $this->longitude) { $label = $label." | $this->latitude - $this->longitude"; }
+        if ($this->latitude && $this->longitude) { $label = $label." | $this->latitude & $this->longitude"; }
         return $label;
     }
 }

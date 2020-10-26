@@ -9,6 +9,6 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    {% include("./includes/react-jsx.html.twig") %}
+    {% include("/includes/react-jsx.html.twig") %}
     <script type="text/babel" src="{{ asset("jsx-react/Ville.js") }}"></script>
 {%  endblock %}

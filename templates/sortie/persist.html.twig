@@ -73,9 +73,9 @@
                     <span class="input-group-text" id="basic-addon1">Ville et lieu :</span>
                 </div>
                 {{ form_widget(sortieForm.lieu) }}
-                <div className="input-group-append">
-                    <span className="input-group-text">
-                        <button type="button" class="btn btn-light d-inline-block" data-toggle="modal" data-target="#lieu-form" id="new-lieu" >
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <button type="button" class="btn btn-light d-inline-block" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                             <i class="fas fa-plus-circle"></i>
                         </button>
                     </span>
@@ -159,6 +159,7 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block javascripts %}
