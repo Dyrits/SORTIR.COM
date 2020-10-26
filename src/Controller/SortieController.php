@@ -44,7 +44,7 @@ class SortieController extends AbstractController
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function persist(int $id, Request $request, EtatRepository $etat) {
+    public function persist(int $id, Request $request) {
         // Checking if the already entity exists, is still available to update, and was made by the current user.
         // Redirecting to different routes if one is not the case.
         $sortie = new Sortie();
@@ -70,14 +70,12 @@ class SortieController extends AbstractController
 
             // Setting the field "etat" according to the submit input which was clicked on:
             $redirection = "sortie_display";
-            if ($sortieForm->get('save')->isClicked()) {
-                $status = 1;
-                $redirection = "sortie_persist";
-            }
+            $status = 1;
+            if ($sortieForm->get('save')->isClicked()) { $redirection = "sortie_persist"; }
             // @todo: Create a service to set the field "etat" according to the dates when publishing.
             else if ($sortieForm->get('publish')->isClicked()) { $status = 2; }
             else if ($sortieForm->get('delete')->isClicked()) { $status = 6; }
-            $sortie->setEtat($etat->find($status));
+            $this->service->setEtat($sortie, $status, $this->getDoctrine()->getRepository(Etat::class));
 
             // Persisting the entity.
             $this->manager->persist($sortie);

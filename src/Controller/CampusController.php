@@ -40,8 +40,8 @@ class CampusController extends AbstractController
      */
     public function list(Request $request) {
         $nom = $request->get("nom");
-        $villes = $this->repository->findByNomLike($nom);
-        return $this->json($villes);
+        $campus = $this->repository->findByNomLike($nom);
+        return $this->json($campus);
     }
 
     /**
@@ -53,11 +53,11 @@ class CampusController extends AbstractController
         $json = json_decode($request->getContent());
         $id = array_key_exists("id", $json) ? $id = $json->id : null;
         $nom = $json->nom;
-        $ville = $id ? $this->repository->find($json->id) : new Campus();
-        $ville->setNom($nom);
-        $this->manager->persist($ville);
+        $campus = $id ? $this->repository->find($json->id) : new Campus();
+        $campus->setNom($nom);
+        $this->manager->persist($campus);
         $this->manager->flush();
-        return $this->json($ville);
+        return $this->json($campus);
     }
 
     /**
