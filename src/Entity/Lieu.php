@@ -26,7 +26,7 @@ class Lieu
      * @Groups("lieu")
      * @ORM\Column(type="string", length=255)
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="Veuillez remplir le champs requis avec le nom de votre lieu")
+     * @Assert\NotBlank(message="Veuillez remplir le champs requis avec le nom du lieu.")
      * @Assert\Length(min="3", max="100")
      * @Assert\Type("string")
      */
@@ -52,41 +52,26 @@ class Lieu
     /**
      * @Groups("lieu")
      * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     * type="float",
-     * message="Veuillez insérer une latitude."
-     * )
-     * @Assert\Range(
-     * min = 10,
-     * max = 30,
-     * minMessage = "Vous devez insérer une latitude de {{ limit }} caractères minimum",
-     * maxMessage = "Vous devez insérer une latitude de {{ limit }} caractères maximum"
-     * )
-     * @TODO : A voir si cet assert est ok : format d'une latitude/longitude
+     * @Assert\Type(type="float", message="Veuillez insérer une latitude.")
+     * @Assert\Range(min = 10, max = 30,
+     *     minMessage = "Vous devez insérer une latitude de {{ limit }} caractères minimum.",
+     *     maxMessage = "Vous devez insérer une latitude de {{ limit }} caractères maximum.")
      */
     private $latitude;
 
     /**
      * @Groups("lieu")
      * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     * type="float",
-     * message="Veuillez insérer une longitude."
-     * )
-     * @Assert\Range(
-     * min = 10,
-     * max = 30,
-     * minMessage = "Vous devez insérer une longitude de {{ limit }} caractères minimum",
-     * maxMessage = "Vous devez insérer une longitude de {{ limit }} caractères maximum"
-     * )
+     * @Assert\Type(type="float",message="Veuillez insérer une longitude.")
+     * @Assert\Range(min = 10, max = 30,
+     *     minMessage = "Vous devez insérer une longitude de {{ limit }} caractères minimum.",
+     *     maxMessage = "Vous devez insérer une longitude de {{ limit }} caractères maximum.")
      * @TODO : A voir si cet assert est ok : format d'une latitude/longitude
      */
     private $longitude;
 
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="lieu")
-     * @Assert\Type("string")
-     * @Assert\NotBlank(message="Veuillez remplir le champs requis")
      */
     private $sorties;
 

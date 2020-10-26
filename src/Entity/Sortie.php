@@ -22,18 +22,15 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *     min = 2,
-     *     max = 255,
-     *     minMessage= "Votre nom de sortie doit au moins de {{ limit }} caractères",
-     *     maxMessage= "Votre nom de sortie doit avoir au maximum {{ limit }} caractères"
-     * )
+     * @Assert\Length(min = 2,max = 255,
+     *     minMessage= "Votre nom de sortie doit au moins de {{ limit }} caractères.",
+     *     maxMessage= "Votre nom de sortie doit avoir au maximum {{ limit }} caractères.")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime(message="Cette date n'est pas valide")
+     * @Assert\DateTime(message="La date entrée n'est pas valide.")
      * @Assert\GreaterThanOrEqual("now")
      */
     private $dateHeureDebut;

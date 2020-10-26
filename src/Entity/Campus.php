@@ -22,7 +22,7 @@ class Campus
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="Veuillez indiquer le nom de votre campus")
+     * @Assert\NotBlank(message="Veuillez indiquer le nom du campus.")
      * @Assert\Length(min="5", max="100", minMessage="Pas assez de caractères, 5 minimum !", maxMessage="Trop de caractères !, 100 maximum !")
      */
     private $nom;

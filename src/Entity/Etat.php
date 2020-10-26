@@ -6,7 +6,6 @@ use App\Repository\EtatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EtatRepository::class)
@@ -28,9 +27,6 @@ class Etat
 
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="etat")
-     * @Assert\Length(min="5", max="255",
-     *                minMessage= "Votre nom de sortie doit au moins de {{ limit }} caractères",
-     *                maxMessage= "Votre nom de sortie doit avoir au maximum {{ limit }} caractères")
      */
     private $sorties;
 
