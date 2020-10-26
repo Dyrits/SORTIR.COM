@@ -12,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ParticipantRepository", repositoryClass=ParticipantRepository::class)
- * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
+ * @UniqueEntity(fields={"pseudo"}, message="Un utilisateur avec ce pseudonyme existe déjà.")
+ * @UniqueEntity(fields={"email"}, message="Un utilisateur avec cet e-mail existe déjà.")
  */
 class Participant implements UserInterface
 {
@@ -39,8 +40,8 @@ class Participant implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Type(type={"alpha", "digit"})
-     * @TODO : voir comment faire assert : REGEx ?
      */
+    // @todo : REGEX.
     private $password;
 
     /**
