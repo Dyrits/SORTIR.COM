@@ -21,7 +21,6 @@ class Etat
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="5", max="255")
      */
     private $libelle;
 

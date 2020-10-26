@@ -72,7 +72,6 @@ class Participant implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Email(message= "L'email saisie '{{ value }}' n'est pas valide.")
      * @Assert\NotBlank(message="Veuillez saisir votre email.")
-     * @Assert\Type(mode:loose)
      */
     private $email;
 
