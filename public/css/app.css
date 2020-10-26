@@ -8,4 +8,8 @@ body {
   overflow-y: auto;
 }
 
+.container-fluid {
+  margin: 0 25px;
+}
+
 /*# sourceMappingURL=app.css.map */

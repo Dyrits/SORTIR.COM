@@ -96,16 +96,16 @@ class SortieController extends AbstractController
      * @return Response
      */
     public function list(Request $request, SerializerInterface $serializer) {
-//        $participant = $request->get("participant");
-//        $nom = $request->get("nom") ? $request->get("nom") : "" ;
-//        $campus = $request->get("campus");
-//        $from = $request->get("from");
-//        $to = $request->get("to");
-//        $isOrganisateur = $request->get("isOrganisateur");
-//        $isInscrit = $request->get("isInscrit");
-//        $isNotInscrit = $request->get("isNotInscrit");
-//        $isFinie = $request->get("isFinie");
-        $sorties = $this->repository->findAll();
+        $participant = $request->get("participant");
+        $nom = $request->get("nom") ? $request->get("nom") : "" ;
+        $campus = $request->get("campus");
+        $from = $request->get("from");
+        $to = $request->get("to");
+        $isOrganisateur = $request->get("isOrganisateur");
+        $isInscrit = $request->get("isInscrit");
+        $isNotInscrit = $request->get("isNotInscrit");
+        $isFinie = $request->get("isFinie");
+        $sorties = $this->repository->findByParameters($participant, $nom, $campus, $from, $to, $isOrganisateur, $isInscrit, $isNotInscrit, $isFinie);
         // Returning a JSON Response.
         $response = new Response();
         $response->headers->set("Content-Type", "application/json");

@@ -9,7 +9,7 @@ const Sortie = ({data}) => {
         {label: "Nom de la sortie", classes: "col-4 col-lg-2"},
         {label: "Date de la sortie", classes: "col-4 col-lg-2"},
         {label: "Clôture", classes: "d-none d-lg-flex col-lg-2"},
-        {label: "Inscrits/Places", classes: "d-none d-lg-flex col-lg-1"},
+        {label: "Inscrits", classes: "d-none d-lg-flex col-lg-1"},
         {label: "Etat", classes: "d-none d-lg-flex col-lg-1"},
         {label: "Inscrit", classes: "d-none d-lg-flex col-lg-1"},
         {label: "Organisateur", classes: "d-none d-lg-flex col-lg-1"},
@@ -41,14 +41,14 @@ const Sortie = ({data}) => {
         sortie.isInscrit = sortie.participants.includes(partipant) && "X";
         sortie.isOrganisateur = sortie.organisateur === partipant;
         sortie.columns = [
-            sortie.nom,
-            sortie.dateHeureDebut,
-            sortie.dateLimiteInscription,
-            sortie.participation,
-            sortie.etat.libelle,
-            sortie.isInscrit,
-            sortie.organisateur.pseudo,
-            sortie.lieu.nom
+            {value: sortie.nom, classes: "col-4 col-lg-2"},
+            {value: new Date(sortie.dateHeureDebut).toLocaleDateString("fr-FR"), classes: "col-4 col-lg-2"},
+            {value: new Date(sortie.dateLimiteInscription).toLocaleDateString("fr-FR"), classes: "d-none d-lg-flex col-lg-2"},
+            {value: sortie.participation, classes: "d-none d-lg-flex col-lg-1"},
+            {value: sortie.etat.libelle, classes: "d-none d-lg-flex col-lg-1"},
+            {value: sortie.isInscrit, classes: "d-none d-lg-flex col-lg-1"},
+            {value: sortie.organisateur.pseudo, classes: "d-none d-lg-flex col-lg-1"},
+            {value: sortie.lieu.nom, classes: "d-flex d-lg-none col-4"},
         ]
         sortie.inputs = [];
         sortie.actions = { classes: "d-none d-lg-flex col-lg-2 input-group mb-3 row" };

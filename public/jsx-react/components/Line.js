@@ -46,7 +46,7 @@ const Line = ({line}) => {
                     icon={input.icon}
                 />
             )}
-            {line.columns && line.columns.map((column, index) => <p key={index}>{column}</p>)}
+            {line.columns && line.columns.map((column, index) => <p className={column.classes} key={index}>{column.value}</p>)}
             <div className={line.actions.classes}>
                 {line.buttons.map((button, index) =>
                     <input
