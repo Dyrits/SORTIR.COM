@@ -1,15 +1,11 @@
 body {
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .lines {
   max-height: 50vh;
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-.container-fluid {
-  margin: 0 25px;
 }
 
 /*# sourceMappingURL=app.css.map */

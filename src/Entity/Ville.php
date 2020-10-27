@@ -38,11 +38,11 @@ class Ville
     /**
      * @ORM\OneToMany(targetEntity=Lieu::class, mappedBy="ville")
      */
-    private $lieux;
+    private $lieus;
 
     public function __construct()
     {
-        $this->lieux = new ArrayCollection();
+        $this->lieus = new ArrayCollection();
     }
 
     public function getId(): ?int

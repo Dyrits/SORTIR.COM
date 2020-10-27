@@ -35,7 +35,8 @@ class SortieController extends AbstractController
      */
     public function display(int $id) {
         $sortie = $this->repository->find($id);
-        return $this->render('sortie/display.html.twig', ["sortie" => $sortie]);
+        if ($sortie != null) { return $this->render('sortie/display.html.twig', ["sortie" => $sortie]); }
+        else { return $this->redirectToRoute("sorties_display"); }
     }
 
     /**
@@ -72,7 +73,6 @@ class SortieController extends AbstractController
             $redirection = "sortie_display";
             $status = 1;
             if ($sortieForm->get('save')->isClicked()) { $redirection = "sortie_persist"; }
-            // @todo: Create a service to set the field "etat" according to the dates when publishing.
             else if ($sortieForm->get('publish')->isClicked()) { $status = 2; }
             else if ($sortieForm->get('delete')->isClicked()) { $status = 6; }
             $this->service->setEtat($sortie, $status, $this->getDoctrine()->getRepository(Etat::class));

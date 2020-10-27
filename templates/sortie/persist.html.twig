@@ -25,14 +25,14 @@
                 {{ form_widget(sortieForm.nom) }}
             </div>
         </div>
-        <div class="row justify-content-between" >
+        <div class="row justify-content-between">
             <div class="input-group my-3 col-xl-6 col-12" >
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Date et heure :</span>
                 </div>
                 {{ form_widget(sortieForm.dateHeureDebut) }}
             </div>
-            <div class="input-group my-3 col-xl-5 col-12">
+            <div class="input-group my-3 col-xl-3 offset-xl-3 col-12">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Date limite d'inscription :</span>
                 </div>
@@ -67,20 +67,16 @@
                 <input disabled type="text" class="form-control" value="{{ app.user.campus.nom }}">
             </div>
         </div>
-        <div class="row" >
-            <div class="input-group my-3 col-12">
+        <div class="row my-3" >
+            <div class="input-group col-10">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Ville et lieu :</span>
                 </div>
                 {{ form_widget(sortieForm.lieu) }}
-                <div class="input-group-append">
-                    <span class="input-group-text">
-                        <button type="button" class="btn btn-light d-inline-block" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            <i class="fas fa-plus-circle"></i>
-                        </button>
-                    </span>
-                </div>
             </div>
+                <button type="button" class="btn btn-sm btn-light col-1" data-toggle="modal" data-target="#lieu-form" data-whatever="@mdo">
+                    <i class="fas fa-plus-circle"></i>
+                </button>
         </div>
         <div class="row justify-content-between my-3 px-5">
                 {# Displaying different inputs according to the status. #}
@@ -107,7 +103,7 @@
             </div>
             <input type="hidden" id="sortie__token" name="sortie[_token]" class="row" value="{{ csrf_token("sortie") }}">
         {{ form_end(sortieForm, {'render_rest': false}) }}
-    {# @todo: MODAL #}
+    {# MODAL #}
     <div class="modal fade" id="lieu-form" tabindex="-1" role="dialog" aria-labelledby="lieu-form-label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

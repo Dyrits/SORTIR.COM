@@ -34,6 +34,7 @@ const Sortie = ({data}) => {
         for (let [pointer, value] of Object.entries(parameters)) {
             if (value) { endpoint += `${pointer}=${value}&`; }
         }
+        console.log(endpoint)
         Ajax.get(endpoint).then(campus => {
             setSorties(campus);
         });
@@ -63,7 +64,7 @@ const Sortie = ({data}) => {
         sortie.actions = { classes: "d-none d-lg-flex col-lg-2 input-group mb-3 row" };
         sortie.buttons = [{
                 value: Helpers.setDefaultValue({"Créée": "Modifier"}, "Afficher"),
-                classes: {true: "btn btn-info col-5", false: "btn btn-warning col-5"},
+                classes: Helpers.setDefaultValue({"Créée": "btn btn-warning col-5"},"btn btn-info col-5"),
                 link: Helpers.setDefaultValue(
                     {"Créée" : `http://localhost/sortir.com/public/sortie/${sortie.id}/persist`},
                     `http://localhost/sortir.com/public/sortie/${sortie.id}`

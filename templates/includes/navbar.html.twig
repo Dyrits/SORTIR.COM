@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
-    <a class="navbar-brand home" href="#">Sortir.com</a>
+    <a class="navbar-brand home" href="{{ path("sorties_display") }}">Sortir.com</a>
     {% if app.user %}
     <ul class="navbar-nav ml-auto d-none d-sm-flex">
         {% if is_granted('ROLE_ADMIN') %}
