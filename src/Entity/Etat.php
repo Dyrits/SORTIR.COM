@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EtatRepository::class)
@@ -24,6 +25,7 @@ class Etat
     /**
      * @Groups("sortie")
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="5", max="255")
      */
     private $libelle;
 

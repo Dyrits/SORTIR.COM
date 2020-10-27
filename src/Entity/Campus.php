@@ -31,7 +31,7 @@ class Campus
 
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="siteOrganisateur")
-     * @Assert\NotBlank(message="Veuillez remplir le champs requis")
+     * @Assert\NotBlank(message="Veuillez remplir le champs requis.")
      */
     private $sorties;
 

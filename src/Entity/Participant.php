@@ -67,6 +67,7 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Assert\Length(max="15", maxMessage= "Votre numéro de téléphone doit avoir au maximum {{ limit }} caractères")
      */
     // @todo: REGEX #^0[1-68][0-9]{8}$#
     private $telephone;

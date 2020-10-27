@@ -2,5 +2,92 @@
 
 {% block title %}{{ parent() }} | {{ sortie.nom }}{% endblock %}
 
-{% block main %}
+{% block body %}
+    <div class="">
+        <div id="title">
+            <h3>Afficher une sortie</h3>
+        </div>
+
+            <div class="">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>Nom de la sortie</th>
+                        <td>{{ sortie.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date et heure de la sortie</th>
+                        <td>{{ sortie.DateHeureDebut ? sortie.DateHeureDebut|date('d/m/Y H:i') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date et heure limite d'inscription</th>
+                        <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y H:i') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nb de participants maximum</th>
+                        <td>{{ sortie.nbInscriptionsMax}}</td>
+                    </tr>
+                    <tr>
+                        <th>Durée</th>
+                        <td>{{ sortie.duree ? sortie.duree.format('%d jour(s) %h heure(s) %i minute(s)') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description et infos</th>
+                        <td>{{ sortie.infosSortie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Campus</th>
+                        <td>{{ campus.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Lieu</th>
+                        <td>{{ sortie.lieu }}</td>
+                    </tr>
+                    <tr>
+                        <th>Rue</th>
+                        <td>{{ lieu.rue }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ville</th>
+                        <td>{{ lieu.ville }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {# exemple d'affichage latitude longitude
+            <div class="cell small-12 medium-6 align-top">
+                <iframe width=100% height=100% frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                        src="https://www.openstreetmap.org/export/embed.html?bbox={{ event.location.longitude-0.005 }}%2C{{ event.location.latitude-0.005 }}%2C{{ event.location.longitude+0.005 }}%2C{{ event.location.latitude+0.005 }}&amp;layer=mapnik&amp;marker={{ event.location.latitude }}%2C{{ event.location.longitude }}"
+                        style="border: 1px solid black"></iframe>
+            </div>
+            #}
+        </div>
+
+        <div class="">
+            <div class="">
+                <p class="text-center">Liste des participants inscrits</p>
+                <table class="">
+                    <thead>
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Nom</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for participant in participants %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.lastName }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.firstName }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
