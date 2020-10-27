@@ -34,7 +34,6 @@ class Sortie
     /**
      * @Groups("sortie")
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime(message="La date entrée n'est pas valide.")
      * @Assert\GreaterThanOrEqual("now")
      */
     private $dateHeureDebut;
@@ -49,7 +48,7 @@ class Sortie
     /**
      * @Groups("sortie")
      * @ORM\Column(type="date")
-     * @Assert\DateTime(message="La date entrée n'est pas valide.")
+     * @Assert\GreaterThanOrEqual("now")
      */
     private $dateLimiteInscription;
 
