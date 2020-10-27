@@ -29,7 +29,7 @@
                     </tr>
                     <tr>
                         <th>Durée</th>
-                        <td>{{ sortie.duree ? sortie.duree.format('%d jour(s) %h heure(s) %i minute(s)') : '' }}</td>
+                        <td>{{ sortie.duree / 60 }}</td>
                     </tr>
                     <tr>
                         <th>Description et infos</th>
@@ -37,19 +37,19 @@
                     </tr>
                     <tr>
                         <th>Campus</th>
-                        <td>{{ campus.nom }}</td>
+                        <td>{{ sortie.siteOrganisateur.nom }}</td>
                     </tr>
                     <tr>
                         <th>Lieu</th>
-                        <td>{{ sortie.lieu }}</td>
+                        <td>{{ sortie.lieu.nom }}</td>
                     </tr>
                     <tr>
                         <th>Rue</th>
-                        <td>{{ lieu.rue }}</td>
+                        <td>{{ sortie.lieu.rue }}</td>
                     </tr>
                     <tr>
                         <th>Ville</th>
-                        <td>{{ lieu.ville }}</td>
+                        <td>{{ sortie.lieu.rue }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -74,7 +74,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for participant in participants %}
+                    {% for participant in sortie.participants %}
                         <tr>
                             <td>
                                 <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.lastName }}</a>
