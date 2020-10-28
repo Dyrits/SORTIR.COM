@@ -1,11 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | Enregistrer un utilisateur{% endblock %}
+{% block title %}
+    {{ parent() }} |
+    {% if is_granted('ROLE_ADMIN') %} Enregistrer un utilisateur
+    {% else %} Modifier mon profil
+    {% endif %}
+{% endblock %}
 
 {% block main %}
-    <h1>Enregistrer un utilisateur</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+         <h1>Enregistrer un utilisateur</h1>
+    {% else %}
+        <h1>Modifier mon profil</h1>
+    {% endif %}
+{# FORM #}
     {{ form_start(registrationForm) }}
-    {{ form_widget(registrationForm) }}
-    <button type="submit" class="btn btn-success">Enregistrer</button>
+    <div class="input-group my-3 col-12">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Pseudo :</span>
+        </div>
+        {{ form_widget(registrationForm.pseudo) }}
+        {{ form_errors(registrationForm.pseudo) }}
+    </div>
+    <div class="input-group my-3 col-12" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Prénom :</span>
+        </div>
+        {{ form_widget(registrationForm.prenom) }}
+        {{ form_errors(registrationForm.prenom) }}
+    </div>
+    <div class="input-group my-3 col-12">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Nom :</span>
+        </div>
+        {{ form_widget(registrationForm.nom) }}
+        {{ form_errors(registrationForm.nom) }}
+    </div>
+    <div class="input-group my-3 col-12">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Téléphone :</span>
+        </div>
+        {{ form_widget(registrationForm.telephone) }}
+        {{ form_errors(registrationForm.telephone) }}
+    </div>
+    <div class="input-group my-3 col-12">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">E-Mail :</span>
+        </div>
+        {{ form_widget(registrationForm.email) }}
+        {{ form_errors(registrationForm.email) }}
+    </div>
+    <div class="input-group my-3 col-12">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Mot de passe :</span>
+        </div>
+        {{ form_widget(registrationForm.plainPassword) }}
+        {{ form_errors(registrationForm.plainPassword) }}
+    </div>
+    <div class="input-group my-3 col-12">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Campus :</span>
+        </div>
+        {{ form_widget(registrationForm.campus) }}
+        {{ form_errors(registrationForm.campus) }}
+    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="text-center my-3">
+        {{ form_widget(registrationForm.actif) }}
+        {{ form_errors(registrationForm.actif) }}
+        {{ form_widget(registrationForm.administrateur) }}
+        {{ form_errors(registrationForm.administrateur) }}
+    </div>
+    {% endif %}
+    <div class="text-center my-3">
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+
+    <input type="hidden" id="sortie__token" name="sortie[_token]" class="row" value="{{ csrf_token("sortie") }}">
     {{ form_end(registrationForm) }}
 {% endblock %}
