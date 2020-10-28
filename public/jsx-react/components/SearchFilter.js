@@ -45,6 +45,7 @@ const SearchFilter = ({onChange}) => {
                         <span className="input-group-text" id="basic-addon1">Campus: </span>
                     </div>
                     <select name="campus" id="campus" onChange={handleChange}>
+                        <option value="" className="text-secondary">-Aucun-</option>
                         {campus.map($campus =>
                             <option key={$campus.id} value={$campus.id} id={$campus.nom}>{$campus.nom}</option>
                         )}
