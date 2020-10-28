@@ -116,6 +116,9 @@ const Sortie = ({data}) => {
         <div>
             <SearchFilter onChange={handleChange} />
             <Table data={sorties} headers={headers} hydrate={hydrate} insertLine={false} />
+            <a href="http://localhost/sortir.com/public/sortie/0/persist">
+                <button type="button" className="btn btn-primary btn-lg">Créeer une sortie</button>
+            </a>
         </div>
     );
 }

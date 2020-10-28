@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin")
- */
 class VilleController extends AbstractController
 {
     private $repository;
@@ -25,7 +22,7 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/villes", name="villes_display")
+     * @Route("/admin/villes", name="villes_display")
      * @param Request $request
      * @return Response
      */
@@ -45,7 +42,7 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/villes/api", name="villes_persist", methods={"POST"})
+     * @Route("/admin/villes/api", name="villes_persist", methods={"POST"})
      * @param Request $request
      * @return Response
      */
@@ -70,7 +67,7 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/villes/api/{id}", name="villes_remove", requirements={"id": "\d+"}, methods={"DELETE"})
+     * @Route("/admin/villes/api/{id}", name="villes_remove", requirements={"id": "\d+"}, methods={"DELETE"})
      * @param $id
      * @param Request $request
      * @return Response

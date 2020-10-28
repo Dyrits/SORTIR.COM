@@ -24,12 +24,12 @@ const Ville = ({data}) => {
 
     const persist = (id, nom, codePostal) => {
         Ajax.persist("/admin/villes/api", {id, nom, codePostal}).then(() => {
-            Ajax.get("/admin/villes/api").then(villes => { setVilles(villes); })
+            Ajax.get("/villes/api").then(villes => { setVilles(villes); })
         });
     };
 
     const get = (nom = "") => {
-        Ajax.get(`/admin/villes/api?nom=${nom}`).then(villes => {
+        Ajax.get(`/villes/api?nom=${nom}`).then(villes => {
             setVilles(villes);
         });
     }
@@ -93,7 +93,7 @@ const Ville = ({data}) => {
     );
 }
 
-Ajax.get("/admin/villes/api").then(villes => {
+Ajax.get("/villes/api").then(villes => {
     ReactDOM.render(
         <Ville data={villes}/>,
         document.querySelector("#table")

@@ -23,7 +23,7 @@ const Campus = ({data}) => {
 
     const persist = (id, nom) => {
         Ajax.persist("/admin/campus/api", {id, nom}).then(() => {
-            Ajax.get("/admin/campus/api").then(campus => { setCampus(campus); })
+            Ajax.get("/campus/api").then(campus => { setCampus(campus); })
         });
     };
 
@@ -85,7 +85,7 @@ const Campus = ({data}) => {
     );
 }
 
-Ajax.get("/admin/campus/api").then(campus => {
+Ajax.get("/campus/api").then(campus => {
     ReactDOM.render(
         <Campus data={campus}/>,
         document.querySelector("#table")
