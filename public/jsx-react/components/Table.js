@@ -8,7 +8,7 @@ const Table = ({data, headers, hydrate, insertLine}) => {
                 { headers.map((header, index) => <h4 key={index} className={header.classes}>{header.label}</h4>) }
             </section>
             <section className="lines">
-                { data.map(line => <Line key={line.id} line={line}/>) }
+                { data.map(line => <Line key={line.id} line={line} />) }
             </section>
             {insertLine &&
             <section className="mt-2">

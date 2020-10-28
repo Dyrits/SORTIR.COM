@@ -44,24 +44,34 @@ class SortieController extends AbstractController
      * @Route("/sortie/{id}/api/subscribe", name="sortie_subscribe", requirements={"id": "\d+"}, methods={"POST"})
      * @param int $id
      */
-    public function subscribe(int $id) {
+    public function subscribe(int $id, SerializerInterface $serializer) {
         $sortie = $this->repository->find($id);
         $participant = $this->getUser();
         $sortie->addParticipant($participant);
         $this->manager->persist($sortie);
         $this->manager->flush();
+        $response = new Response();
+        $response->headers->set("Content-Type", "application/json");
+        $json = $serializer->serialize($sortie, "json", ["groups" => "sortie"]);
+        $response->setContent($json);
+        return $response;
     }
 
     /**
      * @Route("/sortie/{id}/api/unsubscribe", name="sortie_unsubscribe", requirements={"id": "\d+"}, methods={"POST"})
      * @param int $id
      */
-    public function unsubscribe(int $id) {
+    public function unsubscribe(int $id, SerializerInterface $serializer) {
         $sortie = $this->repository->find($id);
         $participant = $this->getUser();
         $sortie->removeParticipant($participant);
         $this->manager->persist($sortie);
         $this->manager->flush();
+        $response = new Response();
+        $response->headers->set("Content-Type", "application/json");
+        $json = $serializer->serialize($sortie, "json", ["groups" => "sortie"]);
+        $response->setContent($json);
+        return $response;
     }
 
     /**

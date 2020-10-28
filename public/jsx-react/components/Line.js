@@ -6,7 +6,7 @@ const Line = ({line}) => {
     // By default, the line which are not inserting entity in the database are disabled.
     const [disabled, setDisabled] = React.useState(!line.insert);
 
-    // Every input value is hooked to a state with its setter.
+    // Every input and buttons value is hooked to a state with its setter.
     line.inputs.forEach(input => { [input.value, input.setValue] = React.useState(input.value); })
 
     // INSERT | UPDATE
@@ -37,12 +37,12 @@ const Line = ({line}) => {
                 send();
                 break;
             case "link":
-                window.location = button.link[line.etat ? line.etat.libelle : disabled];
+                window.location = button.link[line.etat["libelle"] || disabled];
                 break;
             case "post":
-                let endpoint = button.endpoint[line.etat ? line.etat.libelle : disabled];
-                let data = button.data[line.etat ? line.etat.libelle : disabled]
-                Ajax.persist(endpoint, data).then();
+                let endpoint = button.endpoint[line.etat["libelle"] || disabled];
+                let data = button.data[line.etat["libelle"] || disabled]
+                Ajax.persist(endpoint, data).then(response => { line.updateTable(); });
                 break;
         }
     }
@@ -88,9 +88,9 @@ const Line = ({line}) => {
                     <input
                         key={index}
                         type="submit"
-                        value={button.value[line.etat ? line.etat.libelle : disabled]}
+                        value={button.value[line.etat["libelle"] || disabled]}
                         onClick={() => handleClick(button)}
-                        className={button.classes[line.etat ? line.etat.libelle : disabled]} />
+                        className={button.classes[line.etat["libelle"] || disabled]} />
                 )}
             </div>
         </article>

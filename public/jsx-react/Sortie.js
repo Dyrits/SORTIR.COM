@@ -23,16 +23,15 @@ const Sortie = ({data}) => {
 
     // METHODS
 
-    React.useEffect(() => { get(); })
-
     const handleChange = (parameter, value) => {
         setParameters(prevParameters => {
             prevParameters[parameter] = value;
+            get(prevParameters);
             return prevParameters;
         })
     }
 
-    const get = () => {
+    const get = (body = parameters) => {
         let endpoint = "/sorties/api?"
         for (let [pointer, value] of Object.entries(parameters)) {
             if (value) { endpoint += `${pointer}=${value}&`; }
@@ -43,9 +42,11 @@ const Sortie = ({data}) => {
     }
 
     const hydrate = (sortie = null, insert = false) => {
+        sortie.updateTable = () => { get(); }
         // Participation rate (Subscriptions / Capacity):
         sortie.participation = `${sortie["participants"].length}/${sortie["nbInscriptionsMax"]}`;
         // Current user is subscribed to the event:
+        sortie.participant = participant;
         const participants = sortie["participants"].map(participant => participant.id)
         sortie.isInscrit = participants.includes(participant) && "X";
         // Current user is organizing the event:
@@ -69,17 +70,18 @@ const Sortie = ({data}) => {
         // The table has no inputs:
         sortie.inputs = [];
         sortie.actions = { classes: "d-none d-lg-flex col-lg-2 input-group mb-3 row" };
-        sortie.buttons = [{
-                value: Helpers.setDefaultValue({"Créée": "Modifier"}, "Afficher"),
-                classes: Helpers.setDefaultValue({"Créée": "btn btn-warning col-5"},"btn btn-info col-5"),
-                type: "link",
-                link: Helpers.setDefaultValue(
-                    {"Créée" : `http://localhost/sortir.com/public/sortie/${sortie.id}/persist`},
-                    `http://localhost/sortir.com/public/sortie/${sortie.id}`
-                    )
-            }]
+        sortie.buttons = [];
+        sortie.buttons.push({
+            value: Helpers.setDefaultValue({"Créée": "Modifier"}, "Afficher"),
+            classes: Helpers.setDefaultValue({"Créée": "btn btn-warning col-5"},"btn btn-info col-5"),
+            type: "link",
+            link: Helpers.setDefaultValue(
+                {"Créée" : `http://localhost/sortir.com/public/sortie/${sortie.id}/persist`},
+                `http://localhost/sortir.com/public/sortie/${sortie.id}`
+            )
+        })
         // Creating and adding the second button if necessary:
-        if (!["En cours", "Clôturée", "Passée"].includes(sortie.etat.libelle)) {
+        if (["Ouverte", "Créée"].includes(sortie.etat["libelle"])) {
             const value = {}
             const classes = {}
             const endpoint = {};
@@ -87,7 +89,7 @@ const Sortie = ({data}) => {
             if (sortie.isOrganisateur) {
                 value["Ouverte"] = "Annuler";
                 classes["Ouverte"] = "btn btn-danger col-5 offset-1";
-                data["Ouverte"] = {etat: 5};
+                data["Ouverte"] = {etat: 6};
                 value["Créée"] = "Publier";
                 classes["Créée"] = "btn btn-success col-5 offset-1";
                 data["Créée"] = {etat: 2};
