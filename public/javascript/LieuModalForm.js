@@ -1,5 +1,5 @@
 $('#lieu-form').on('show.bs.modal', function (event) {
-   Ajax.get("/admin/villes/api").then(villes => {
+   Ajax.get("/villes/api").then(villes => {
        const select = $("#ville-lieu");
        if (select.has('option').length === 0) {
            villes.forEach(ville => {

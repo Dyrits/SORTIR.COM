@@ -14,9 +14,9 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('dateHeureDebut', null, ['data' => new \DateTime("now")])
+            ->add('dateHeureDebut')
             ->add('duree')
-            ->add('dateLimiteInscription', null, ['data' => new \DateTime("now")])
+            ->add('dateLimiteInscription')
             ->add('nbInscriptionsMax')
             ->add('infosSortie')
             ->add('lieu', null, ['choice_label' => 'label'])

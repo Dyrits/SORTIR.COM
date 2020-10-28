@@ -1,23 +1,24 @@
 {%  extends 'base.html.twig' %}
 
-{# @todo : fix pseudo : comment recuperer le pseudo du participant ?#}
+{% block title %}{{ parent() }} | {{ participant.pseudo }} {% endblock %}
+
 {% block main %}
 
-    <h1>{{ $pseudo }}</h1>
+    <h1>{{ {{ participant.pseudo }} }}</h1>
         <div>
-            <label for="prenom">Prénom : {{ Participant.prenom }}</label>
+            <label for="prenom">Prénom : {{ participant.prenom }}</label>
         </div>
     <div>
-        <label for="nom">Nom : {{ Participant.nom }}</label>
+        <label for="nom">Nom : {{ participant.nom }}</label>
     </div>
     <div>
-        <label for="telephone">Téléphone : {{ Participant.telephone }}</label>
+        <label for="telephone">Téléphone : {{ participant.telephone }}</label>
     </div>
     <div>
-        <label for="">Email : {{ Participant.email }}</label>
+        <label for="">Email : {{ participant.email }}</label>
     </div>
     <div>
-        <label for="">Campus : {{ Campus.nom }}</label>
+        <label for="">Campus : {{ participant.campus.nom }}</label>
     </div>
     <div>
         <button type="button" name="Retour">Retour</button>
@@ -26,4 +27,3 @@
 {% endblock %}
 
 
-{% block title %}Pseudo | {{ parent() }}{% endblock %}

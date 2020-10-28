@@ -52,6 +52,18 @@ class SortieController extends AbstractController
     }
 
     /**
+     * @Route("/sortie/{id}/api/unsubscribe", name="sortie_unsubscribe", requirements={"id": "\d+"}, methods={"POST"})
+     * @param int $id
+     */
+    public function unsubscribe(int $id) {
+        $sortie = $this->repository->find($id);
+        $participant = $this->getUser();
+        $sortie->removeParticipant($participant);
+        $this->manager->persist($sortie);
+        $this->manager->flush();
+    }
+
+    /**
      * @Route("/sortie/{id}/persist", name="sortie_persist", requirements={"id": "\d+"}, defaults={"id": 0})
      * @param int $id
      * @param Request $request
