@@ -18,25 +18,30 @@ const Sortie = ({data}) => {
     ]
 
     const [sorties, setSorties] = React.useState(data);
+    const [parameters, setParameters] = React.useState({participant: participant});
 
 
     // METHODS
 
-    const get = (nom = "",
-                 campus = "",
-                 debut = null,
-                 fin = null,
-                 isOrganisateur = false,
-                 isInscrit = false,
-                 isFinie = false) => {
-        const parameters = {nom, campus, debut, fin, isOrganisateur, isInscrit, isFinie};
+    const handleChange = (parameter, value) => {
+        setParameters(prevParameters => {
+            prevParameters[parameter] = value;
+            return prevParameters;
+        })
+        get();
+    }
+
+    const get = () => {
         let endpoint = "/sorties/api?"
+        console.log(parameters);
+        console.log(Object.entries(parameters));
         for (let [pointer, value] of Object.entries(parameters)) {
+            console.log(pointer, value);
             if (value) { endpoint += `${pointer}=${value}&`; }
         }
-        console.log(endpoint)
-        Ajax.get(endpoint).then(campus => {
-            setSorties(campus);
+        console.log(endpoint);
+        Ajax.get(endpoint).then(sorties => {
+            setSorties(sorties);
         });
     }
 
@@ -44,7 +49,8 @@ const Sortie = ({data}) => {
         // Participation rate (Subscriptions / Capacity):
         sortie.participation = `${sortie["participants"].length}/${sortie["nbInscriptionsMax"]}`;
         // Current user is subscribed to the event:
-        sortie.isInscrit = sortie["participants"].includes(participant) && "X";
+        const participants = sortie["participants"].map(participant => participant.id)
+        sortie.isInscrit = participants.includes(participant) && "X";
         // Current user is organizing the event:
         sortie.isOrganisateur = sortie["organisateur"].id === participant;
         // Labels of the different columns:
@@ -55,7 +61,11 @@ const Sortie = ({data}) => {
             {value: sortie.participation, classes: "d-none d-lg-flex col-lg-1"},
             {value: sortie["etat"]["libelle"], classes: "d-none d-lg-flex col-lg-1"},
             {value: sortie.isInscrit, classes: "d-none d-lg-flex col-lg-1"},
-            {value: sortie["organisateur"]["pseudo"], classes: "d-none d-lg-flex col-lg-1"},
+            {
+                value: sortie["organisateur"]["pseudo"],
+                classes: "d-none d-lg-flex col-lg-1",
+                link: `http://localhost/sortir.com/public/participant/${sortie["organisateur"]["id"]}`
+            },
             // Only displayed in small screen:
             {value: sortie["lieu"]["nom"], classes: "d-flex d-lg-none col-4"},
         ]
@@ -65,6 +75,7 @@ const Sortie = ({data}) => {
         sortie.buttons = [{
                 value: Helpers.setDefaultValue({"Créée": "Modifier"}, "Afficher"),
                 classes: Helpers.setDefaultValue({"Créée": "btn btn-warning col-5"},"btn btn-info col-5"),
+                type: "link",
                 link: Helpers.setDefaultValue(
                     {"Créée" : `http://localhost/sortir.com/public/sortie/${sortie.id}/persist`},
                     `http://localhost/sortir.com/public/sortie/${sortie.id}`
@@ -84,13 +95,14 @@ const Sortie = ({data}) => {
                 link["Créée"] = ""; // @todo: Publish action.
             } else {
                 value["Ouverte"] = sortie.isInscrit ? "Se désister" : "S'inscrire";
-                classes["Ouverte"] = sortie.isInscrit ? "btn btn-warning col-5 offset-1" : "btn btn-info col-5 offset-1";
+                classes["Ouverte"] = sortie.isInscrit ? "btn btn-warning col-5 offset-1" : "btn btn-success col-5 offset-1";
                 link["Ouverte"] = ""; // @todo: Subscribe / Unsubscribe action.
             }
             sortie.buttons.push({
                 value: value,
                 classes: Helpers.setDefaultValue(classes, "btn btn-danger col-5 offset-1"),
-                link: "http://localhost/sortir.com/public/"
+                link: "http://localhost/sortir.com/public/",
+                type: "link"
             });
         }
         return sortie;
@@ -101,7 +113,7 @@ const Sortie = ({data}) => {
 
     return (
         <div>
-            <SearchBar onChange={get} />
+            <SearchFilter onChange={handleChange} />
             <Table data={sorties} headers={headers} hydrate={hydrate} insertLine={false} />
         </div>
     );

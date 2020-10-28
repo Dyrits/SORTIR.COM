@@ -40,6 +40,18 @@ class SortieController extends AbstractController
     }
 
     /**
+     * @Route("/sortie/{id}/api/subscribe", name="sortie_subscribe", requirements={"id": "\d+"}, methods={POST})
+     * @param int $id
+     */
+    public function subscribe(int $id) {
+        $sortie = $this->repository->find($id);
+        $participant = $this->getUser();
+        $sortie->addParticipant($participant);
+        $this->manager->persist($sortie);
+        $this->manager->flush();
+    }
+
+    /**
      * @Route("/sortie/{id}/persist", name="sortie_persist", requirements={"id": "\d+"}, defaults={"id": 0})
      * @param int $id
      * @param Request $request
@@ -68,6 +80,7 @@ class SortieController extends AbstractController
             $campus = $organisateur->getCampus();
             $sortie->setOrganisateur($organisateur);
             $sortie->setSiteOrganisateur($campus);
+            $sortie->addParticipant($organisateur);
 
             // Setting the field "etat" according to the submit input which was clicked on:
             $redirection = "sortie_display";

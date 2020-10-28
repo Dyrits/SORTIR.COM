@@ -28,7 +28,7 @@ const Campus = ({data}) => {
     };
 
     const get = (nom = "") => {
-        Ajax.get(`/admin/campus/api?nom=${nom}`).then(campus => {
+        Ajax.get(`/campus/api?nom=${nom}`).then(campus => {
             setCampus(campus);
         });
     }
@@ -52,7 +52,7 @@ const Campus = ({data}) => {
         if (insert) {
             $campus.buttons = [
                 {
-                    persist: true,
+                    type: "persist",
                     value: Helpers.setDefaultValue({}, "Ajouter"),
                     classes: Helpers.setDefaultValue({}, "btn btn-success col-5"),
                 }
@@ -60,12 +60,12 @@ const Campus = ({data}) => {
         } else {
             $campus.buttons = [
                 {
-                    persist: true,
+                    type: "persist",
                     value: {"true": "Modifier", "false": "Valider"},
                     classes: {"true": "btn btn-info col-5", "false": "btn btn-warning col-5"}
                 },
                 {
-                    remove: true,
+                    type: "remove",
                     value: Helpers.setDefaultValue({}, "Supprimer"),
                     classes: Helpers.setDefaultValue({}, "btn btn-danger col-5 offset-1")
                 }

@@ -29,12 +29,14 @@ const Line = ({line}) => {
     }
 
     const handleClick = (button) => {
-        // If the button has the "remove" attribute, the remove() method is called on the line.
-        if (button.remove) { return line.remove(line); }
-        // If the button has the "persist" attribute, the send() method is called to send the new or updated data.
-        if (button.persist) { return send(); }
-        // If the button has the "link" attribute, the associated method is called.
-        if (button.link) {}
+        switch (button.type) {
+            case "remove":
+                return line.remove(line);
+            case "persist":
+                return send();
+            case "link":
+                window.location = button.link[line.etat ? line.etat.libelle : disabled];
+        }
     }
 
     // If "Enter" is pressed, the send() method is called to send the new or updated data.
@@ -42,6 +44,11 @@ const Line = ({line}) => {
 
     // On change, every hooked value is updated to the new value provided.
     const handleChange = (setValue, value) => { setValue(value); }
+
+    const labelColumn = (label, index) => label.link ?
+            <div className={label.classes} key={index}><a href={label.link}>{label.value}</a></div> :
+            <div className={label.classes} key={index}>{label.value}</div>;
+
 
     return (
         <article className="row mb-2">
@@ -66,9 +73,7 @@ const Line = ({line}) => {
                 </div>
             )}
             {/*If a line has texts, they are displayed as columns.*/}
-            {line.labels && line.labels.map((column, index) =>
-                <p className={column.classes} key={index}>{column.value}</p>
-            )}
+            {line.labels && line.labels.map((label, index) => labelColumn(label, index))}
             <div className={line.actions.classes}>
                 {/*The lines buttons are the different actions available for each line.*/}
                 {line.buttons.map((button, index) =>

@@ -77,10 +77,10 @@
                     {% for participant in sortie.participants %}
                         <tr>
                             <td>
-                                <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.lastName }}</a>
+                                <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.nom }}</a>
                             </td>
                             <td>
-                                <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.firstName }}</a>
+                                <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.prenom }}</a>
                             </td>
                         </tr>
                     {% endfor %}

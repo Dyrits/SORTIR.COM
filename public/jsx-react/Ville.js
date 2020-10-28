@@ -60,7 +60,7 @@ const Ville = ({data}) => {
         if (insert) {
             ville.buttons = [
                 {
-                    persist: true,
+                    type: "persist",
                     value: Helpers.setDefaultValue({}, "Ajouter"),
                     classes: Helpers.setDefaultValue({}, "btn btn-success col-5")
                 }
@@ -68,12 +68,12 @@ const Ville = ({data}) => {
         } else {
             ville.buttons = [
                 {
-                    persist: true,
+                    type: "persist",
                     value: {true: "Modifier", false: "Valider"},
                     classes: {true: "btn btn-info col-5", false: "btn btn-warning col-5"}
                 },
                 {
-                    remove: true,
+                    type: "remove",
                     value: Helpers.setDefaultValue({}, "Supprimer"),
                     classes: Helpers.setDefaultValue({}, "btn btn-danger col-5 offset-1")
                 }
