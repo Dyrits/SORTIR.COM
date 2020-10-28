@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }} | {{ participant.pseudo }} {% endblock %}
 
 {% block main %}
-
+    <div class="text-center">
     <h1>{{ participant.pseudo }}</h1>
         <div>
             <label for="prenom">Prénom : {{ participant.prenom }}</label>
@@ -21,7 +21,8 @@
         <label for="">Campus : {{ participant.campus.nom }}</label>
     </div>
     <div>
-        <button type="button" name="Retour">Retour</button>
+        <a href="{{ path("sorties_display") }}"><button class="btn btn-info " type="button" name="Retour">Retour</button></a>
+    </div>
     </div>
 
 {% endblock %}

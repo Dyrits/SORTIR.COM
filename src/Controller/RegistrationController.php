@@ -42,7 +42,6 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            // @todo: Change the redirection to the profile:
             if ($this->getUser()) { return $this->redirectToRoute('app_register'); }
 
            return $guardHandler->authenticateUserAndHandleSuccess(

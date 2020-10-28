@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} |Enregistrer un utilisateur
+    {{ parent() }} | Modifier mon profil
 {% endblock %}
 
 {% block main %}
-    <h1>Enregistrer un utilisateur</h1>
+    <h1>Modifier mon profil | {{ participant.pseudo }}</h1>
     {% include("includes/profile-form.html.twig") %}
 {% endblock %}

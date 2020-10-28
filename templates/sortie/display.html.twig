@@ -4,58 +4,56 @@
 
 {% block main %}
     <section class="">
-        <div id="title" class="text-center">
-            <h3>Afficher une sortie</h3>
-        </div>
+        <h1 class="text-center  my-3">Sortie | {{ sortie.nom }}</h1>
 
         {# Affichage de la sortie #}
         <div class="jumbotron">
-            <div class="row justify-content-between">
-                <div class="col-6">
-                    <p>Nom de la sortie : {{ sortie.nom }}</p>
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Nom de la sortie :</span> {{ sortie.nom }}</p>
                 </div>
-                <div class="col-6">
-                    <p>Campus : {{ sortie.siteOrganisateur.nom  }}</p>
-                </div>
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-6">
-                    <p>Date et heure de la sortie : {{ sortie.DateHeureDebut ? sortie.DateHeureDebut|date('d/m/Y H:i') : '' }}</p>
-                </div>
-                <div class="col-6">
-                    <p>Lieu : {{ sortie.lieu.nom }}</p>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Campus :</span>{{ sortie.siteOrganisateur.nom  }}</p>
                 </div>
             </div>
-            <div class="row justify-content-between">
-                <div class="col-6">
-                    <p>Date et heure limite d'inscription : {{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y H:i') : '' }}</p>
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Date et heure de la sortie :</span> {{ sortie.DateHeureDebut ? sortie.DateHeureDebut|date('d/m/Y H:i') : '' }}</p>
                 </div>
-                <div class="col-6">
-                    <p>Rue : {{ sortie.lieu.rue  }}</p>
-                </div>
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-6">
-                    <p>Nb de participants maximum : {{ sortie.nbInscriptionsMax }}</p>
-                </div>
-                <div class="col-6">
-                    <p>Ville : {{ sortie.lieu.rue }}</p>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Lieu :</span> {{ sortie.lieu.nom }}</p>
                 </div>
             </div>
-            <div class="row justify-content-between">
-                <div class="col-6">
-                    <p>Durée : {{ sortie.duree / 60  }} minutes</p>
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Date et heure limite d'inscription :</span> {{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y H:i') : '' }}</p>
                 </div>
-                <div class="col-6">
-                    <p>Latitude : </p>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Rue :</span> {{ sortie.lieu.rue  }}</p>
                 </div>
             </div>
-            <div class="row justify-content-between">
-                <div class="col-6">
-                    <p>Description et infos : {{ sortie.infosSortie }}</p>
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Nb de participants maximum :</span> {{ sortie.nbInscriptionsMax }}</p>
                 </div>
-                <div class="col-6">
-                    <p>Longitude : </p>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Ville :</span> {{ sortie.lieu.rue }}</p>
+                </div>
+            </div>
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Durée :</span> {{ sortie.duree / 60  }} minutes</p>
+                </div>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Latitude :</span> </p>
+                </div>
+            </div>
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Description et infos :</span> {{ sortie.infosSortie }}</p>
+                </div>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Longitude :</span> </p>
                 </div>
             </div>
             {# exemple d'affichage latitude longitude
@@ -64,7 +62,6 @@
                        src="https://www.openstreetmap.org/export/embed.html?bbox={{ event.location.longitude-0.005 }}%2C{{ event.location.latitude-0.005 }}%2C{{ event.location.longitude+0.005 }}%2C{{ event.location.latitude+0.005 }}&amp;layer=mapnik&amp;marker={{ event.location.latitude }}%2C{{ event.location.longitude }}"
                        style="border: 1px solid black"></iframe>
            </div>#}
-        </div>
         </div>
     </section>
 
