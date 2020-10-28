@@ -13,7 +13,6 @@ const SearchFilter = ({onChange}) => {
     React.useEffect(() => { onChange("nom", nom); }, [nom])
 
     const handleChange = ($event) => {
-        console.log($event.target.value);
         switch ($event.target.type) {
             case "checkbox":
                 onChange($event.target.name, $event.target.checked);

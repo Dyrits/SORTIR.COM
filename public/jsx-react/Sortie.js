@@ -23,12 +23,13 @@ const Sortie = ({data}) => {
 
     // METHODS
 
+    React.useEffect(() => { get(); })
+
     const handleChange = (parameter, value) => {
         setParameters(prevParameters => {
             prevParameters[parameter] = value;
             return prevParameters;
         })
-        get();
     }
 
     const get = () => {

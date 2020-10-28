@@ -33,10 +33,10 @@ class SortieRepository extends ServiceEntityRepository
         if ($to) { $query->andWhere("s.dateHeureDebut <= :fin")->setParameter("fin", $to); }
         if ($isOrganisateurOnly) { $query->andWhere("s.organisateur = :organisateur")->setParameter("organisateur", $id); }
         else if ($isOrganisateur) { $query->orWhere("s.organisateur = :organisateur")->setParameter("organisateur", $id); }
-        if ($isInscritOnly) { $query->andWhere(":isInscrit IN s.participants")->setParameter("isInscrit", $id); }
-        else if ($isInscrit) { $query->orWhere(":isInscrit IN s.participants")->setParameter("isInscrit", $id); }
-        if ($isNotInscritOnly) { $query->andWhere($query->expr()->notIn($id, "s.participants")); }
-        else if ($isNotInscrit) { $query->orWhere($query->expr()->notIn($id, "s.participants")); }
+        if ($isInscritOnly) { $query->andWhere(":isInscrit MEMBER OF s.participants")->setParameter("isInscrit", $id); }
+        else if ($isInscrit) { $query->orWhere(":isInscrit MEMBER OF s.participants")->setParameter("isInscrit", $id); }
+        if ($isNotInscritOnly) { $query->andWhere(":isNotInscrit NOT MEMBER OF s.participants")->setParameter("isNotInscrit", $id);; }
+        else if ($isNotInscrit) { $query->orWhere(":isNotInscrit NOT MEMBER OF s.participants")->setParameter("isNotInscrit", $id); }
         if ($isFinieOnly) { $query->andWhere("s.etat = :etat")->setParameter("etat", 5); }
         else if ($isFinie) { $query->orWhere("s.etat = :etat")->setParameter("etat", 5); }
         return $query->getQuery()->getResult();

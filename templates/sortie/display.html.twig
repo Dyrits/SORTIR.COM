@@ -2,92 +2,93 @@
 
 {% block title %}{{ parent() }} | {{ sortie.nom }}{% endblock %}
 
+{# Probleme affchage navbar !#}
 {% block body %}
-    <div class="">
-        <div id="title">
+    <section class="">
+        <div id="title" class="text-center">
             <h3>Afficher une sortie</h3>
         </div>
 
-            <div class="">
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Nom de la sortie</th>
-                        <td>{{ sortie.nom }}</td>
-                    </tr>
-                    <tr>
-                        <th>Date et heure de la sortie</th>
-                        <td>{{ sortie.DateHeureDebut ? sortie.DateHeureDebut|date('d/m/Y H:i') : '' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Date limite d'inscription</th>
-                        <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y') : '' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Nb de participants maximum</th>
-                        <td>{{ sortie.nbInscriptionsMax}}</td>
-                    </tr>
-                    <tr>
-                        <th>Durée</th>
-                        <td>{{ sortie.duree / 60 }}</td>
-                    </tr>
-                    <tr>
-                        <th>Description et infos</th>
-                        <td>{{ sortie.infosSortie }}</td>
-                    </tr>
-                    <tr>
-                        <th>Campus</th>
-                        <td>{{ sortie.siteOrganisateur.nom }}</td>
-                    </tr>
-                    <tr>
-                        <th>Lieu</th>
-                        <td>{{ sortie.lieu.nom }}</td>
-                    </tr>
-                    <tr>
-                        <th>Rue</th>
-                        <td>{{ sortie.lieu.rue }}</td>
-                    </tr>
-                    <tr>
-                        <th>Ville</th>
-                        <td>{{ sortie.lieu.rue }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+        {# Affichage de la sortie #}
+        <div class="jumbotron">
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <p>Nom de la sortie : {{ sortie.nom }}</p>
+                </div>
+                <div class="col-6">
+                    <p>Campus : {{ sortie.siteOrganisateur.nom  }}</p>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <p>Date et heure de la sortie : {{ sortie.DateHeureDebut ? sortie.DateHeureDebut|date('d/m/Y H:i') : '' }}</p>
+                </div>
+                <div class="col-6">
+                    <p>Lieu : {{ sortie.lieu.nom }}</p>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <p>Date et heure limite d'inscription : {{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y H:i') : '' }}</p>
+                </div>
+                <div class="col-6">
+                    <p>Rue : {{ sortie.lieu.rue  }}</p>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <p>Nb de participants maximum : {{ sortie.nbInscriptionsMax }}</p>
+                </div>
+                <div class="col-6">
+                    <p>Ville : {{ sortie.lieu.rue }}</p>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <p>Durée : {{ sortie.duree / 60  }} minutes</p>
+                </div>
+                <div class="col-6">
+                    <p>Latitude : </p>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <p>Description et infos : {{ sortie.infosSortie }}</p>
+                </div>
+                <div class="col-6">
+                    <p>Longitude : </p>
+                </div>
             </div>
             {# exemple d'affichage latitude longitude
-            <div class="cell small-12 medium-6 align-top">
-                <iframe width=100% height=100% frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                        src="https://www.openstreetmap.org/export/embed.html?bbox={{ event.location.longitude-0.005 }}%2C{{ event.location.latitude-0.005 }}%2C{{ event.location.longitude+0.005 }}%2C{{ event.location.latitude+0.005 }}&amp;layer=mapnik&amp;marker={{ event.location.latitude }}%2C{{ event.location.longitude }}"
-                        style="border: 1px solid black"></iframe>
-            </div>
-            #}
+           <div class="cell small-12 medium-6 align-top">
+               <iframe width=100% height=100% frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                       src="https://www.openstreetmap.org/export/embed.html?bbox={{ event.location.longitude-0.005 }}%2C{{ event.location.latitude-0.005 }}%2C{{ event.location.longitude+0.005 }}%2C{{ event.location.latitude+0.005 }}&amp;layer=mapnik&amp;marker={{ event.location.latitude }}%2C{{ event.location.longitude }}"
+                       style="border: 1px solid black"></iframe>
+           </div>#}
         </div>
+        </div>
+    </section>
 
-        <div class="">
-            <div class="">
-                <p class="text-center">Liste des participants inscrits</p>
-                <table class="">
-                    <thead>
-                    <tr>
-                        <th>Pseudo</th>
-                        <th>Nom</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for participant in sortie.participants %}
-                        <tr>
-                            <td>
-                                <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.nom }}</a>
-                            </td>
-                            <td>
-                                <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.prenom }}</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="container">
+        <p class="">Liste des participants inscrits</p>
+        <table class="table table-striped table-bordered table-hovered">
+            <thead>
+            <tr class="thead-light">
+                <th>Pseudo</th>
+                <th>Nom complet</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for participant in sortie.participants %}
+                <tr>
+                    <td>
+                        <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.pseudo }}</a>
+                    </td>
+                    <td>{{ participant.prenom }} {{ participant.nom }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}

@@ -40,7 +40,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/sortie/{id}/api/subscribe", name="sortie_subscribe", requirements={"id": "\d+"}, methods={POST})
+     * @Route("/sortie/{id}/api/subscribe", name="sortie_subscribe", requirements={"id": "\d+"}, methods={"POST"})
      * @param int $id
      */
     public function subscribe(int $id) {
