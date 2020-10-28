@@ -31,11 +31,19 @@ const Line = ({line}) => {
     const handleClick = (button) => {
         switch (button.type) {
             case "remove":
-                return line.remove(line);
+                line.remove(line);
+                break;
             case "persist":
-                return send();
+                send();
+                break;
             case "link":
                 window.location = button.link[line.etat ? line.etat.libelle : disabled];
+                break;
+            case "post":
+                let endpoint = button.endpoint[line.etat ? line.etat.libelle : disabled];
+                let data = button.data[line.etat ? line.etat.libelle : disabled]
+                Ajax.persist(endpoint, data).then();
+                break;
         }
     }
 

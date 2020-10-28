@@ -81,7 +81,7 @@
             {% for participant in sortie.participants %}
                 <tr>
                     <td>
-                        <a href="{{ path('participant', {'id': participant.id }) }}">{{ participant.pseudo }}</a>
+                        <a href="{{ path('participant_display', {'id': participant.id }) }}">{{ participant.pseudo }}</a>
                     </td>
                     <td>{{ participant.prenom }} {{ participant.nom }}</td>
                 </tr>

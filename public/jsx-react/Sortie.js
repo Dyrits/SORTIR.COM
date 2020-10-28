@@ -34,13 +34,9 @@ const Sortie = ({data}) => {
 
     const get = () => {
         let endpoint = "/sorties/api?"
-        console.log(parameters);
-        console.log(Object.entries(parameters));
         for (let [pointer, value] of Object.entries(parameters)) {
-            console.log(pointer, value);
             if (value) { endpoint += `${pointer}=${value}&`; }
         }
-        console.log(endpoint);
         Ajax.get(endpoint).then(sorties => {
             setSorties(sorties);
         });
@@ -86,24 +82,27 @@ const Sortie = ({data}) => {
         if (!["En cours", "Clôturée", "Passée"].includes(sortie.etat.libelle)) {
             const value = {}
             const classes = {}
-            const link = {}
+            const endpoint = {};
+            const data = {}
             if (sortie.isOrganisateur) {
                 value["Ouverte"] = "Annuler";
                 classes["Ouverte"] = "btn btn-danger col-5 offset-1";
-                link["Ouverte"] = ""; // @todo: Cancellation action.
+                data["Ouverte"] = {etat: 5};
                 value["Créée"] = "Publier";
                 classes["Créée"] = "btn btn-success col-5 offset-1";
-                link["Créée"] = ""; // @todo: Publish action.
+                data["Créée"] = {etat: 2};
             } else {
                 value["Ouverte"] = sortie.isInscrit ? "Se désister" : "S'inscrire";
                 classes["Ouverte"] = sortie.isInscrit ? "btn btn-warning col-5 offset-1" : "btn btn-success col-5 offset-1";
-                link["Ouverte"] = ""; // @todo: Subscribe / Unsubscribe action.
+                endpoint["Ouverte"] =`/sortie/${sortie.id}/api/${sortie.isInscrit ? "unsubscribe" : "subscribe"}`
+                data["Ouverte"] = null;
             }
             sortie.buttons.push({
                 value: value,
                 classes: Helpers.setDefaultValue(classes, "btn btn-danger col-5 offset-1"),
-                link: "http://localhost/sortir.com/public/",
-                type: "link"
+                endpoint: Helpers.setDefaultValue(endpoint, `/sortie/${sortie.id}/post/api`),
+                data: data,
+                type: "post"
             });
         }
         return sortie;

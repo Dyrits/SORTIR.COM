@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Service\SortieService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -96,9 +97,11 @@ class SortieController extends AbstractController
 
             // Setting the field "etat" according to the submit input which was clicked on:
             $redirection = "sortie_display";
-            $status = 1;
-            if ($sortieForm->get('save')->isClicked()) { $redirection = "sortie_persist"; }
-            else if ($sortieForm->get('publish')->isClicked()) { $status = 2; }
+            $status = 2; // Default status.
+            if ($sortieForm->get('save')->isClicked()) {
+                $status = 1;
+                $redirection = "sortie_persist"; }
+            else if ($sortieForm->get('publish')->isClicked()) { $status = 2;}
             else if ($sortieForm->get('delete')->isClicked()) { $status = 6; }
             $this->service->setEtat($sortie, $status, $this->getDoctrine()->getRepository(Etat::class));
 
@@ -113,6 +116,33 @@ class SortieController extends AbstractController
         // Redirecting if the form is not submitted.
         return $this->render("sortie/persist.html.twig", ["sortieForm" => $sortieForm->createView(), "sortie" => $sortie]);
     }
+
+    /**
+     * @Route("/sortie/{id}/post/api", name="sortie_post", requirements={"id": "\d+"})
+     * @param int $id
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @param EtatRepository $repository
+     * @return RedirectResponse|Response
+     */
+    public function post(int $id, Request $request, SerializerInterface $serializer, EtatRepository $repository) {
+        $sortie = $this->repository->find($id);
+        $json = json_decode($request->getContent());
+        $etat = $repository->find(intval($json->etat));
+        $sortie->setEtat($etat);
+
+        // Persisting the entity.
+        $this->manager->persist($sortie);
+        $this->manager->flush();
+        $sortieForm =$this->createForm(SortieType::class, $sortie );
+        $sortieForm->handleRequest($request);
+
+        // Returning a JSON Response.
+        $response = new Response();
+        $response->headers->set("Content-Type", "application/json");
+        $response->setContent($serializer->serialize($sortie, "json", ["groups" => "sortie"]));
+        return $response;
+        }
 
     /**
      * @Route("/sorties/api", name="sorties_list", methods={"GET"})
