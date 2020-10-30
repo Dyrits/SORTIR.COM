@@ -88,9 +88,9 @@ const Line = ({line}) => {
                     <input
                         key={index}
                         type="submit"
-                        value={button.value[line.etat["libelle"] || disabled]}
+                        value={button.value[line.etat ? line.etat["libelle"] : disabled]}
                         onClick={() => handleClick(button)}
-                        className={button.classes[line.etat["libelle"] || disabled]} />
+                        className={button.classes[line.etat ? line.etat["libelle"] : disabled]} />
                 )}
             </div>
         </article>
