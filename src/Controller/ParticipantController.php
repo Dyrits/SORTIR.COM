@@ -37,7 +37,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/participant/persist", name="participant_persist"})
+     * @Route("/participant/persist", name="participant_persist")
      * @param Request $request
      * @return Response
      */

@@ -24,8 +24,20 @@ Ce projet a été réalisé en collaboration avec [Stéphane M.](https://github.
 
 La logique et l'hydratation des propriétés des *components* React doit être revu (via des *components* séparés).
 
+De nombreux dysfonctionnements sont toujours présents et restent à corriger dans de futures mises à jour.
+
 ### Contribution
 Les *pull requests* sont les bienvenues. Pour les changements majeurs, merci d'ouvrir une *issue* pour en discuter.
+
+### Installation | Utilisation
+**Requiert un environnement Apache/MySQL/PHP fonctionnel.**
+- 1/ Placez le projet au sein de votre répertoire projet /www
+- 2/ Exécutez le fichier *install.bat* ou exécutez manuellement les commandes suivantes :
+    - `composer install`
+    - `php bin/console make:migration`
+    - `php bin/console doctrine:migrations:migrate`
+
+Le projet est accessible en local via l'URL [http://localhost/sortir.com/public/](http://localhost/sortir.com/public/).
 
 ### Statut
 En cours de développement (~61%)
