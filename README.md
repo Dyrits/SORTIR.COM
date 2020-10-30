@@ -28,7 +28,7 @@ La logique et l'hydratation des propriétés des *components* React doit être r
 Les *pull requests* sont les bienvenues. Pour les changements majeurs, merci d'ouvrir une *issue* pour en discuter.
 
 ### Statut
-En cours de développement (~61%).
+En cours de développement (~61%)
 - ~~1001 / Se connecter~~
 - ~~1002 / Se souvenir de moi~~
 - ~~1003/ Gérer son profil~~
