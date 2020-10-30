@@ -1,4 +1,4 @@
-# Projet d’application webSortir.com
+# Projet d’application web Sortir.com
 
 ## A propos de ce projet
 
