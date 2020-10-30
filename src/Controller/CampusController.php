@@ -48,9 +48,9 @@ class CampusController extends AbstractController
      */
     public function persist(Request $request) {
         $json = json_decode($request->getContent());
-        $id = array_key_exists("id", $json) ? $id = $json->id : null;
+        $id = array_key_exists("id", $json) ? $json->id : null;
         $nom = $json->nom;
-        $campus = $id ? $this->repository->find($json->id) : new Campus();
+        $campus = $id ? $this->repository->find($id) : new Campus();
         $campus->setNom($nom);
         $this->manager->persist($campus);
         $this->manager->flush();
@@ -64,9 +64,9 @@ class CampusController extends AbstractController
      * @return Response
      */
     public function remove($id, Request $request) {
-        $ville = $this->repository->find($id);
-        $this->manager->remove($ville);
+        $campus = $this->repository->find($id);
+        $this->manager->remove($campus);
         $this->manager->flush();
-        return $this->json($ville);
+        return $this->json($campus);
     }
 }

@@ -69,7 +69,7 @@ const Line = ({line}) => {
                     </span>
                     </div>
                     <input
-                        disabled={input.disabled}
+                        disabled={disabled}
                         type="text"
                         className="form-control"
                         onChange={({target}) => handleChange(input.setValue, target.value)}
