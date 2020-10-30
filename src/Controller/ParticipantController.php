@@ -31,20 +31,18 @@ class ParticipantController extends AbstractController
      */
     public function display(int $id) {
         $participant = $this->repository->find($id);
-        if($participant == $this->getUser()) { return $this->redirectToRoute("participant_persist", ["id" => $id]); }
+        if($participant == $this->getUser()) { return $this->redirectToRoute("participant_persist"); }
         if ($participant != null) { return $this->render('participant/display.html.twig', ["participant" => $participant]); }
         else { return $this->redirectToRoute("sorties_display"); }
     }
 
     /**
-     * @Route("/participant/{id}/persist", name="participant_persist", requirements={"id": "\d+"})
-     * @param int $id
+     * @Route("/participant/persist", name="participant_persist"})
      * @param Request $request
      * @return Response
      */
-    public function persist(int $id, Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator) {
-        $participant = $this->repository->find($id);
-        if (!$participant) { return $this->redirectToRoute("sorties_display"); }
+    public function persist(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator) {
+        $participant = $this->getUser();
 
         // Creating the form using the same form used to register a new user, and handling the request.
         $editForm =$this->createForm(RegistrationFormType::class, $participant);
@@ -70,7 +68,8 @@ class ParticipantController extends AbstractController
             // Redirecting.
             return $this->redirectToRoute("participant_display", ["id" => $participant->getId()]);
         }
-
+        // Refresh the user:
+        $this->manager->refresh($participant);
         // Redirecting if the form is not submitted.
         return $this->render("participant/persist.html.twig", ["registrationForm" => $editForm->createView(), "participant" => $participant]);
     }
