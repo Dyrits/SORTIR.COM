@@ -3,7 +3,7 @@
 ## A propos de ce projet
 
 ### Cursus
-ENI | Projet – Le développement d’une application we
+ENI | Projet – Le développement d’une application web
 
 ### [Documentation](https://github.com/Dyrits/SORTIR.COM/tree/master/documentation)
 
@@ -16,10 +16,12 @@ ENI | Projet – Le développement d’une application we
     - Doctrine
 - JavaScript
     - React
+        - JSX
     - Babel
 
 ### Détails | Commentaires
 Ce projet a été réalisé en collaboration avec [Stéphane M.](https://github.com/stefROM-dev/).
+
 La logique et l'hydratation des propriétés des *components* React doit être revu (via des *components* séparés).
 
 ### Contribution
