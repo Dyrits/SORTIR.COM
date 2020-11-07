@@ -34,10 +34,13 @@ Les *pull requests* sont les bienvenues. Pour les changements majeurs, merci d'o
 - 1/ Placez le projet au sein de votre répertoire projet /www
 - 2/ Exécutez le fichier *install.bat* ou exécutez manuellement les commandes suivantes :
     - `composer install`
+    - `php bin/console doctrine:database:create`
     - `php bin/console make:migration`
     - `php bin/console doctrine:migrations:migrate`
 
 Le projet est accessible en local via l'URL [http://localhost/sortir.com/public/](http://localhost/sortir.com/public/).
+
+Afin d'accéder au site, il est nécessaire de créer un utilisateur (Participant) en base de données, en tant qu'administrateur de préférence.
 
 ### Statut
 En cours de développement (~61%)
@@ -67,5 +70,6 @@ En cours de développement (~61%)
 
 
 #### Dernière mise à jour
-30/10/2020
-(README | 30/10/2020)
+07/11/2020
+(README | 07/11/2020)
+
