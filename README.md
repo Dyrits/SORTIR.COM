@@ -1,48 +1,22 @@
-# Projet d’application web Sortir.com
+# Sortir.com
 
-## A propos de ce projet
+A web application for organizing outings, built with Symfony and React, as an ENI course project.
 
-### Cursus
-ENI | Projet – Le développement d’une application web
+## About The Project
 
-### [Documentation](https://github.com/Dyrits/SORTIR.COM/tree/master/documentation)
+Final project of the ENI course "Projet - Le développement d'une application web". The documentation, including the original assignment (in French), is available in the repository: [documentation](https://github.com/Dyrits/SORTIR.COM/tree/master/documentation).
 
-### Technologies | Outils
-**Stack : WAMP**
-- PHP
-    - Composer
-    - Symfony
-        - Twig
-    - Doctrine
-- JavaScript
-    - React
-        - JSX
-    - Babel
+From the assignments: the application manages outings ("sorties") organized by campus - users can sign in, manage their profile, register for or withdraw from outings, and administrators can manage users, cities and venues.
 
-### Détails | Commentaires
-Ce projet a été réalisé en collaboration avec [Stéphane M.](https://github.com/stefROM-dev/).
+From the author's notes: the project was made in collaboration with [Stéphane M.](https://github.com/stefROM-dev/). The logic and hydration of the React components' properties should be reworked (through separate components), and many malfunctions are still present and remain to be fixed in future updates.
 
-La logique et l'hydratation des propriétés des *components* React doit être revu (via des *components* séparés).
+### Status
 
-De nombreux dysfonctionnements sont toujours présents et restent à corriger dans de futures mises à jour.
+In development, per the original README, with the following feature tracking:
 
-### Contribution
-Les *pull requests* sont les bienvenues. Pour les changements majeurs, merci d'ouvrir une *issue* pour en discuter.
+<details markdown="block">
+<summary>Feature list (from the original README, in French)</summary>
 
-### Installation | Utilisation
-**Requiert un environnement Apache/MySQL/PHP fonctionnel.**
-- 1/ Placez le projet au sein de votre répertoire projet /www
-- 2/ Exécutez le fichier *install.bat* ou exécutez manuellement les commandes suivantes :
-    - `composer install`
-    - `php bin/console doctrine:database:create`
-    - `php bin/console make:migration`
-    - `php bin/console doctrine:migrations:migrate`
-
-Le projet est accessible en local via l'URL [http://localhost/sortir.com/public/](http://localhost/sortir.com/public/).
-
-Afin d'accéder au site, il est nécessaire de créer un utilisateur (Participant) en base de données, en tant qu'administrateur de préférence.
-
-### Statut
 En cours de développement (~61%)
 - ~~1001 / Se connecter~~
 - ~~1002 / Se souvenir de moi~~
@@ -68,8 +42,31 @@ En cours de développement (~61%)
 - ~~2014 / Gérer les lieux~~
 - 4001 / Gérer des groupes privés
 
+</details>
 
-#### Dernière mise à jour
-07/11/2020
-(README | 07/11/2020)
+## Built With
 
+- PHP / Symfony (Twig, Doctrine, Composer)
+- JavaScript / React (JSX, Babel)
+- WAMP stack
+
+## Getting Started
+
+From the original README: a working Apache/MySQL/PHP environment is required. Place the project in the `/www` directory and run `install.bat`, or run manually:
+
+```sh
+composer install
+php bin/console doctrine:database:create
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+```
+
+The project is then accessible locally at http://localhost/sortir.com/public/. A user (Participant) must be created in the database, as an administrator, to access the site.
+
+## License
+
+No license file is present in this repository.
+
+## Contact
+
+Dylan J. Gerrits - [GitHub](https://github.com/Dyrits)
