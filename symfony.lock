@@ -26,6 +26,15 @@
     "doctrine/dbal": {
         "version": "2.11.2"
     },
+    "doctrine/deprecations": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "fdd756167454623e21f1d769c5b814b243782a67"
+        }
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.0",
         "recipe": {
@@ -172,9 +181,6 @@
     "symfony/css-selector": {
         "version": "v4.4.15"
     },
-    "symfony/debug": {
-        "version": "v4.4.15"
-    },
     "symfony/debug-bundle": {
         "version": "4.1",
         "recipe": {
@@ -266,9 +272,6 @@
         "version": "v4.4.15"
     },
     "symfony/http-kernel": {
-        "version": "v4.4.15"
-    },
-    "symfony/inflector": {
         "version": "v4.4.15"
     },
     "symfony/intl": {
@@ -503,6 +506,15 @@
     },
     "twig/twig": {
         "version": "v3.0.5"
+    },
+    "vich/uploader-bundle": {
+        "version": "1.23",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.13",
+            "ref": "1b3064c2f6b255c2bc2f56461aaeb76b11e07e36"
+        }
     },
     "webmozart/assert": {
         "version": "1.9.1"
