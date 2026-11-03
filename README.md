@@ -70,3 +70,7 @@ No license file is present in this repository.
 ## Contact
 
 Dylan J. Gerrits - [GitHub](https://github.com/Dyrits)
+
+## Archive and verification limits
+
+Archived as a learning reference at the owner's request. Dependency updates reduced findings, but Twig advisories remain. The old Symfony/PHP stack is not a currently supported production baseline. Local parity checks are limited to the tested development environment; no hosted deployment, real database or production service was verified.
